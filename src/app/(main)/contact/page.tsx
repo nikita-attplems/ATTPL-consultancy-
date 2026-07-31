@@ -13,7 +13,7 @@ const contactCards = [
   {
     icon: <FaEnvelope />,
     title: "Email Us",
-    value: "info@attplconsulting.com",
+    value: "info@attplgroup.com",
   },
   {
     icon: <FaPhoneAlt />,

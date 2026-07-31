@@ -27,22 +27,10 @@ const quickLinks = [
   },
 
   {
-    name: "Network",
-    href: "/network",
-  },
-  {
-    name: "Marketplace",
+    name: "Experts",
     href: "/marketplace",
   },
-  {
-    name: "HealthTech",
-    href: "/healthtech",
-  },
 
-  {
-    name: "Medical Tourism",
-    href: "/Medical-Tourism",
-  },
   {
     name: "About Us",
     href: "/about",

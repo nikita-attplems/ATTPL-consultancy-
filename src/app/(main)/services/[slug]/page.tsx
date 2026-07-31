@@ -5,23 +5,18 @@ import ServiceProcess from "@/components/services/ServiceProcess";
 import FAQ from "@/components/common/FAQ";
 import CTA from "@/components/common/CTA";
 
-import { serviceData } from "@/data/service";
+import { serviceData, type ServiceSlug } from "@/data/service";
 import SuccessStories from "@/components/services/SuccessStories";
 
 
 export default async function Page({
   params,
 }: {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ slug: ServiceSlug }>;
 }) {
-
   const { slug } = await params;
 
-  console.log("SLUG:", slug)
-
   const loadService = serviceData[slug];
-
-  console.log("Loaded service:", loadService)
 
   if (!loadService) {
     return null;

@@ -32,7 +32,7 @@ export default function CTA() {
 
             <Link
   href="/marketplace"
-  className="rounded-xl bg-[#0B1B3A] px-7 py-3 font-semibold text-white transition hover:bg-blue-900"
+  className="rounded-xl bg-[#1B2435] px-7 py-3 font-semibold text-white transition "
 >
   Explore Marketplace
 </Link>

@@ -190,7 +190,7 @@ export default function LegalComplianceHub() {
                   </span>
 
                   {/* Title */}
-                  <h4 className="mt-4 text-2xl font-bold leading-tight text-slate-900 transition group-hover:text-blue-600">
+                  <h4 className="mt-4 text-2xl font-bold leading-tight text-slate-900 transition group-hover:text-yellow-600">
                     {service.title}
                   </h4>
 

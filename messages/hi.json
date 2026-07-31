@@ -1,0 +1,20 @@
+{
+  "chat": {
+    "placeholder": "संदेश लिखें...",
+    "placeholderDisabled": "चैट स्थानांतरित — एजेंट WhatsApp पर संपर्क करेगा...",
+    "send": "भेजें",
+    "connecting": "एजेंट से जोड़ा जा रहा है...",
+    "transferred": "मानव एजेंट को स्थानांतरित किया गया",
+    "online": "ऑनलाइन",
+    "general": "सामान्य",
+    "connectingSpecialist": "ATTPL विशेषज्ञ से जोड़ा जा रहा है...",
+    "continueWhatsApp": "WhatsApp पर जारी रखें",
+    "handoffTitle": "हमारी टीम से जोड़ा जा रहा है",
+    "handoffSubtitle": "हमारी टीम आपकी सहायता के लिए तैयार है।",
+    "whatsapp": "WhatsApp पर चैट करें",
+    "contactForm": "संपर्क फॉर्म भरें",
+    "viewServices": "हमारी सेवाएं देखें",
+    "visitWebsite": "वेबसाइट पर जाएं",
+    "teamReply": "हमारी टीम जल्द आपसे संपर्क करेगी।"
+  }
+}

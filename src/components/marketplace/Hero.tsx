@@ -43,28 +43,28 @@ const floatingCards = [
     subtitle: "Business Consultant",
     extra: "12+ Years Experience",
     icon: <FiUsers size={20} />,
-    position: "top-0 left-0 lg:-left-8 lg:top-8",
+    position: "md:top-0 md:left-0 lg:-left-8 lg:top-8",
   },
   {
     title: "Registration",
     subtitle: "Private Limited",
     extra: "LLP • OPC • MSME",
     icon: <FiBriefcase size={20} />,
-    position: "top-8 right-0 lg:-right-10",
+    position: "md:top-8 md:right-0 lg:-right-10",
   },
   {
     title: "Compliance",
     subtitle: "ISO • GST • Legal",
     extra: "Trusted Experts",
     icon: <FiShield size={20} />,
-    position: "bottom-8 left-6 lg:left-0",
+    position: "md:bottom-8 md:left-6 lg:left-0",
   },
   {
     title: "Technology",
     subtitle: "ERP • CRM",
     extra: "Digital Transformation",
     icon: <FiSearch size={20} />,
-    position: "bottom-0 right-0 lg:-right-8",
+    position: "md:bottom-0 md:right-0 lg:-right-8",
   },
 ];
 
@@ -111,7 +111,7 @@ export default function MarketplaceHero() {
             {/* CTA */}
             <div className="mt-10 flex flex-wrap gap-4">
               <Link
-                href="/experts"
+                href="/service-form"
                 className="inline-flex items-center rounded-xl bg-slate-900 px-6 py-4 text-sm font-semibold text-white transition hover:bg-slate-800"
               >
                 Find an Expert
@@ -119,14 +119,14 @@ export default function MarketplaceHero() {
               </Link>
 
               <Link
-                href="/services"
+                href="/#services"
                 className="inline-flex items-center rounded-xl border border-slate-300 px-6 py-4 text-sm font-semibold text-slate-800 transition hover:border-slate-900"
               >
                 Browse Services
               </Link>
 
               <Link
-                href="/partner"
+                href="/service-form"
                 className="inline-flex items-center rounded-xl border border-blue-600 px-6 py-4 text-sm font-semibold text-blue-600 transition hover:bg-blue-600 hover:text-white"
               >
                 Become a Partner
@@ -148,15 +148,52 @@ export default function MarketplaceHero() {
 
           {/* RIGHT */}
           <div className="relative flex justify-center">
-            <div className="relative h-[600px] w-full max-w-xl">
+            <div
+              className="
+    relative
+    w-full
+    max-w-xl
+    min-h-fit
+    md:h-[520px]
+    lg:h-[600px]
+    flex
+    flex-col
+    items-center
+    justify-center
+    gap-5
+    md:block
+  "
+            >
               {/* Center Circle */}
               {/* Center Circle */}
-              <div className="absolute left-1/2 top-1/2 flex h-72 w-72 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-slate-200 bg-white shadow-2xl">
+              <div
+                className="
+    relative
+    mx-auto
+    flex
+    h-44 w-44
+    sm:h-52 sm:w-52
+    md:absolute
+    md:left-1/2
+    md:top-1/2
+    md:h-60 md:w-60
+    lg:h-72 lg:w-72
+    md:-translate-x-1/2
+    md:-translate-y-1/2
+    items-center
+    justify-center
+    rounded-full
+    border
+    border-slate-200
+    bg-white
+    shadow-2xl
+  "
+              >
                 <div className="text-center">
                   {/* Logo */}
-                  <div className="relative mx-auto h-68 w-58">
+                  <div className="relative mx-auto h-32 w-28 sm:h-40 sm:w-36 md:h-52 md:w-44 lg:h-68 lg:w-58">
                     <Image
-                      src="/logo/frame-1.webp"
+                      src="/logo/logo-crop.gif"
                       alt="ATTPL Logo"
                       fill
                       className="object-contain"
@@ -171,7 +208,27 @@ export default function MarketplaceHero() {
               {floatingCards.map((card) => (
                 <div
                   key={card.title}
-                  className={`absolute ${card.position} w-56 rounded-2xl border border-slate-200 bg-white p-5 shadow-xl transition duration-300 hover:-translate-y-2`}
+                  className={`
+${card.position}
+md:absolute
+relative
+mx-auto
+mt-4
+md:mt-0
+w-full
+max-w-xs
+md:w-52
+lg:w-56
+rounded-2xl
+border
+border-slate-200
+bg-white
+p-5
+shadow-xl
+transition
+duration-300
+hover:-translate-y-2
+`}
                 >
                   <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-xl bg-blue-50 text-blue-600">
                     {card.icon}

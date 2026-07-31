@@ -3,12 +3,12 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-
+import { HiOutlineMenuAlt3, HiOutlineX } from "react-icons/hi";
+import { FiChevronDown, FiChevronUp } from "react-icons/fi";
 
 const SCROLL_THRESHOLD = 100;
 
 const navigation = [
-  
   {
     label: "About Us",
     href: "/about",
@@ -17,6 +17,7 @@ const navigation = [
     label: "Experts",
     href: "/marketplace",
   },
+
   {
     label: "Services",
     href: "/",
@@ -63,12 +64,17 @@ const navigation = [
       },
     ],
   },
+  {
+    label: "Contact",
+    href: "/contact",
+  },
 ];
 
 export default function Navbar() {
   const [isVisible, setIsVisible] = useState(true);
   const lastScrollY = useRef(0);
-  
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -95,15 +101,28 @@ export default function Navbar() {
     };
   }, []);
 
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 1024) {
+        setMobileMenuOpen(false);
+        setMobileServicesOpen(false);
+      }
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   return (
     <nav
-      className={`fixed top-4 left-1/2 z-50 w-[96%] max-w-7xl -translate-x-1/2 rounded-2xl
+      className={`fixed top-4 left-1/2 z-50 w-[94%] sm:w-[95%] lg:w-[96%] max-w-7xl -translate-x-1/2 rounded-2xl
          border border-white/50 bg-white/60 backdrop-blur-4xl shadow-[0_8px_30px_rgba(0,0,0,0.08)]
           transition-all duration-500 ${
             isVisible ? "translate-y-0" : "-translate-y-32"
           }`}
     >
-      <div className="flex h-18 items-center justify-between px-6 lg:px-8">
+      <div className="flex h-16 lg:h-18 items-center justify-between px-4 sm:px-6 lg:px-8">
         {/* Logo */}
         <Link href="/" className="flex items-center">
           <Image
@@ -112,7 +131,7 @@ export default function Navbar() {
             width={180}
             height={60}
             priority
-            className="h-16 w-auto object-contain"
+            className="h-12 sm:h-14 lg:h-16 w-auto object-contain"
           />
         </Link>
 
@@ -196,8 +215,6 @@ export default function Navbar() {
                       </Link>
                     ))}
                   </div>
-
-              
                 </div>
               )}
             </li>
@@ -208,34 +225,107 @@ export default function Navbar() {
         <div className="hidden items-center gap-3 lg:flex">
           {/* CTA */}
           <Link
-            href="/contact"
-            className="rounded-full bg-black px-6 py-3 text-sm font-semibold text-white shadow-lg transition-all duration-300 hover:-translate-y-0.5 hover:bg-gray-800 hover:shadow-xl"
+            href="/service-form"
+            className="rounded-full bg-[#1B2435] px-6 py-3 text-sm font-semibold text-white shadow-lg transition-all duration-300 hover:-translate-y-0.5 hover:bg-gray-800 hover:shadow-xl"
           >
             Book Consultation →
           </Link>
         </div>
 
         {/* Mobile Button */}
-        <button
-          className="flex h-11 w-11 items-center justify-center rounded-full border border-gray-200 lg:hidden"
-          aria-label="Open Menu"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-6 w-6 text-gray-800"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            strokeWidth={2}
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M4 6h16M4 12h16M4 18h16"
-            />
-          </svg>
-        </button>
+    
+       <button
+  onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+  className="flex h-11 w-11 items-center justify-center rounded-full border border-gray-200 bg-white lg:hidden"
+  aria-label="Open Menu"
+>
+  {mobileMenuOpen ? (
+    <HiOutlineX className="h-6 w-6 text-black" />
+  ) : (
+    <HiOutlineMenuAlt3 className="h-6 w-6 text-black" />
+  )}
+</button>
       </div>
+      {/* Mobile Menu */}
+<div
+  className={`overflow-hidden transition-all duration-300 lg:hidden ${
+    mobileMenuOpen ? "max-h-[700px] border-t" : "max-h-0"
+  }`}
+>
+  <div className="space-y-2 bg-white px-6 py-5">
+
+    {navigation.map((item) => (
+      <div key={item.label}>
+
+        {/* Normal Link */}
+        {!item.children && (
+          <Link
+            href={item.href}
+            onClick={() => setMobileMenuOpen(false)}
+            className="block rounded-lg px-3 py-3 text-gray-700 hover:bg-gray-100"
+          >
+            {item.label}
+          </Link>
+        )}
+
+        {/* Services */}
+        {item.children && (
+          <>
+            <button
+              onClick={() =>
+                setMobileServicesOpen(!mobileServicesOpen)
+              }
+              className="flex w-full items-center justify-between rounded-lg px-3 py-3 text-left text-gray-700 hover:bg-gray-100"
+            >
+              <span>{item.label}</span>
+
+              {mobileServicesOpen ? (
+                <FiChevronUp />
+              ) : (
+                <FiChevronDown />
+              )}
+            </button>
+
+            <div
+              className={`overflow-hidden transition-all duration-300 ${
+                mobileServicesOpen
+                  ? "max-h-[700px] mt-2"
+                  : "max-h-0"
+              }`}
+            >
+              <div className="ml-4 border-l border-gray-200 pl-4">
+
+                {item.children.map((child) => (
+                  <Link
+                    key={child.label}
+                    href={child.href}
+                    onClick={() => {
+                      setMobileMenuOpen(false);
+                      setMobileServicesOpen(false);
+                    }}
+                    className="block rounded-lg px-3 py-2 text-sm text-gray-600 hover:bg-gray-50 hover:text-black"
+                  >
+                    {child.label}
+                  </Link>
+                ))}
+
+              </div>
+            </div>
+          </>
+        )}
+      </div>
+    ))}
+
+    <Link
+      href="/service-form"
+      onClick={() => setMobileMenuOpen(false)}
+      className="mt-4 block rounded-full bg-black px-5 py-3 text-center font-semibold text-white"
+    >
+      Book Consultation →
+    </Link>
+
+  </div>
+</div>
     </nav>
   );
 }
