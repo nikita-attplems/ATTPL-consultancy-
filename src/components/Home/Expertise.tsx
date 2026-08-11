@@ -66,7 +66,7 @@ export default function Expertise() {
   return (
     <>
       {/* HEADER SECTION */}
-      <section className="bg-gray-50 py-24">
+      <section className="bg-[#FFFDF8] py-24">
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end gap-10">
             <div>
@@ -102,7 +102,7 @@ export default function Expertise() {
 
 
       {/* DESKTOP HORIZONTAL SCROLL */}
-     <section className="bg-gray-50 py-24">
+     <section className="bg-[#FFFDF8] py-24">
   <div className="max-w-7xl mx-auto px-6">
  
 

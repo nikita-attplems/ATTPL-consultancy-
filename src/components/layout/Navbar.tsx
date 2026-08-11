@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { HiOutlineMenuAlt3, HiOutlineX } from "react-icons/hi";
+import { HiOutlineMenu , HiOutlineX } from "react-icons/hi";
 import { FiChevronDown, FiChevronUp } from "react-icons/fi";
 
 const SCROLL_THRESHOLD = 100;
@@ -242,7 +242,7 @@ export default function Navbar() {
   {mobileMenuOpen ? (
     <HiOutlineX className="h-6 w-6 text-black" />
   ) : (
-    <HiOutlineMenuAlt3 className="h-6 w-6 text-black" />
+    <HiOutlineMenu  className="h-6 w-6 text-black" />
   )}
 </button>
       </div>

@@ -7,39 +7,38 @@ import { useGSAP } from "@gsap/react";
 gsap.registerPlugin(ScrollTrigger);
 
 const About = () => {
-  const sectionRef = useRef(null);
-  const textRef = useRef(null);
-  const numberRef = useRef(null);
+const sectionRef = useRef<HTMLElement | null>(null);
+const textRef = useRef<HTMLDivElement | null>(null);
+const numberRef = useRef<HTMLSpanElement | null>(null);
 
   useGSAP(() => {
-    // Entrance animation for the text blocks on the right
-    gsap.from(textRef.current.children, {
-      y: 50,
-      opacity: 0,
-      duration: 1,
-      stagger: 0.2,
-      ease: "power3.out",
-      scrollTrigger: {
-        trigger: sectionRef.current,
-        start: "top 60%", // Triggers when the top of the section hits 60% of the viewport height
-        toggleActions: "restart reverse restart reverse",
-      },
-    });
+  if (!sectionRef.current || !textRef.current || !numberRef.current) return;
 
-    // High-performance GSAP count animation
-    gsap.to(numberRef.current, {
-      innerHTML: 16,
-      duration: 2.5,
-      ease: "power2.out",
-      snap: { innerHTML: 1 },
-      scrollTrigger: {
-        trigger: sectionRef.current,
-        start: "top 60%", // Triggers when the top of the section hits 60% of the viewport height
-        once: true, // Ensures the animation only plays once upon loading the section
-      },
-    });
-  }, []);
+  gsap.from(textRef.current.children, {
+    y: 50,
+    opacity: 0,
+    duration: 1,
+    stagger: 0.2,
+    ease: "power3.out",
+    scrollTrigger: {
+      trigger: sectionRef.current,
+      start: "top 60%",
+      toggleActions: "restart reverse restart reverse",
+    },
+  });
 
+  gsap.to(numberRef.current, {
+    innerHTML: 16,
+    duration: 2.5,
+    ease: "power2.out",
+    snap: { innerHTML: 1 },
+    scrollTrigger: {
+      trigger: sectionRef.current,
+      start: "top 60%",
+      once: true,
+    },
+  });
+}, []);
   return (
     <section
       id="about"

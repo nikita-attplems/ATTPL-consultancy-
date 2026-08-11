@@ -56,10 +56,10 @@ export default function ChatInput({ theme }: ChatInputProps) {
             content: currentText,
         };
 
-        addMsg(userMessage);
-        socket.emit("send-message", userMessage);
-        setText("");
-        setIsTyping(true);
+        // addMsg(userMessage);
+        // socket.emit("send-message", userMessage);
+        // setText("");
+        // setIsTyping(true);
 
         try {
             const lead = JSON.parse(localStorage.getItem("attplLead") || "{}");

@@ -12,7 +12,7 @@ interface Props {
 
 export default function ServiceOfferings({ data }: Props) {
   return (
-    <section className="bg-slate-50 py-24">
+    
       <div className="mx-auto max-w-7xl px-6">
 
         {/* Heading */}
@@ -32,6 +32,6 @@ export default function ServiceOfferings({ data }: Props) {
         </div>
 
       </div>
-    </section>
+    
   );
 }
