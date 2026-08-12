@@ -1,520 +1,449 @@
 
 "use client";
 
-import React, {
-  useEffect,
-  useMemo,
-  useState,
-} from "react";
+import { useMemo, useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 
-import Header from "@/src/components/layout/Header";
-import ProgressBar from "@/src/components/service-form/ui/ProgressBar";
+import ProgressBar from "@/components/ui/ProgressBar";
+import Header from "@/components/layout/Header";
+import SuccessDialog from "@/components/dialog/SuccessDialog";
 
-import {
-  useAppDispatch,
-  useAppSelector,
-} from "@/src/redux/hooks";
-
-import {
-  clearStates,
-  setDepartment,
-} from "@/src/redux/slices/esccomSlice";
-
-import { submitServiceForm } from "@/src/redux/thunks/submitServiceFormThunk";
-
-import api from "@/src/redux/api/axios";
-
-/* ======================================================
-   CONSULTANCY FORM COMPONENTS
-====================================================== */
-
-import Step1BasicInfo from "@/src/components/service-form/forms/Step1Applicant";
-import Step2ApplicantCategory from "@/src/components/service-form/forms/Step2BasicInfo";
-import Step3Organization from "@/src/components/service-form/forms/Step3Organization";
-
-import Step4ConsultancyProfile from "@/src/components/service-form/forms/Step4ConsultancyProfile";
-import Step5ConsultancyServices from "@/src/components/service-form/forms/Step5ConsultancyServices";
-
-import Step6TechnologyAssessment from "@/src/components/service-form/forms/Step6TechnologyAssessment";
-import Step7Engagement from "@/src/components/service-form/forms/Step7Engagement";
-
-import Step8LeaderNetwork from "@/src/components/service-form/forms/Step8LeaderNetwork";
-
-import Step9ProfessionalPartner from "@/src/components/service-form/forms/Step9ProfessionalPartnerRegistration";
-
-import Step10VendorRegistration from "@/src/components/service-form/forms/Step10VendorRegistration";
-
-import Step11OrganizationAssessment from "@/src/components/service-form/forms/Step11OrganizationAssessment";
-
-import Step12ProjectRequirement from "@/src/components/service-form/forms/Step12ProjectRequirement";
-
-import Step13DocumentCollection from "@/src/components/service-form/forms/Step13DocumentCollection";
-
-import Step14ConsultationBooking from "@/src/components/service-form/forms/Step14ConsultationBooking";
-
-import Step15ConsentDeclaration from "@/src/components/service-form/forms/Step15ConsentDeclaration";
+import { RootState } from "@/redux/store";
+import { useAppDispatch,useAppSelector } from "@/redux/hooks";
 
 
-/* ======================================================
-   STEP TYPE
-====================================================== */
+import { resetSubmitStatus } from "@/redux/slices/esccomSlice";
 
-interface StepItem {
-  key: string;
-  label: string;
-  component: React.ReactNode;
-}
+import { getDynamicSteps,DynamicStep } from "@/components/constants/form/esccomSteps";
 
+import { submitServiceForm } from "@/redux/thunks/submitServiceForm";
+import fetchDepartments from "@/redux/thunks/fetchDepartments";
 
-/* ======================================================
-   CONSULTANCY STEPS
-====================================================== */
-
-const ALL_STEPS: StepItem[] = [
-  {
-    key: "basic",
-    label: "Basic",
-    component: <Step1BasicInfo />,
-  },
-
-  {
-    key: "category",
-    label: "Category",
-    component: <Step2ApplicantCategory />,
-  },
-
-  {
-    key: "organization",
-    label: "Organization",
-    component: <Step3Organization />,
-  },
-
-  {
-    key: "consultancyProfile",
-    label: "Profile",
-    component: <Step4ConsultancyProfile />,
-  },
-
-  {
-    key: "consultancyServices",
-    label: "Services",
-    component: <Step5ConsultancyServices />,
-  },
-
-  {
-    key: "technologyAssessment",
-    label: "Technology",
-    component: <Step6TechnologyAssessment />,
-  },
-
-  {
-    key: "engagement",
-    label: "Engagement",
-    component: <Step7Engagement />,
-  },
-
-  {
-    key: "leaderNetwork",
-    label: "Leader Network",
-    component: <Step8LeaderNetwork />,
-  },
-
-  {
-    key: "professionalPartner",
-    label: "Professional",
-    component: <Step9ProfessionalPartner />,
-  },
-
-  {
-    key: "vendorRegistration",
-    label: "Vendor",
-    component: <Step10VendorRegistration />,
-  },
-
-  {
-    key: "organizationAssessment",
-    label: "Assessment",
-    component: <Step11OrganizationAssessment />,
-  },
-
-  {
-    key: "projectRequirement",
-    label: "Project",
-    component: <Step12ProjectRequirement />,
-  },
-
-  {
-    key: "documents",
-    label: "Documents",
-    component: <Step13DocumentCollection />,
-  },
-
-  {
-    key: "consultation",
-    label: "Consultation",
-    component: <Step14ConsultationBooking />,
-  },
-
-  {
-    key: "consent",
-    label: "Consent",
-    component: <Step15ConsentDeclaration />,
-  },
-];
-
-
-/* ======================================================
-   PAGE
-====================================================== */
-
-export default function ConsultancyPage() {
+export default function ESCOMPage() {
   const [step, setStep] = useState<number>(1);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const dispatch = useAppDispatch();
 
+  const submitStatus = useAppSelector(
+    (state) => state.esccom.submitStatus
+  );
 
-  /* ====================================================
-     FETCH CONSULTANCY DEPARTMENT
-  ==================================================== */
+  const submitError = useAppSelector(
+    (state) => state.esccom.submitError
+  );
+
+  const applicantCategory = useSelector(
+    (state: RootState) => state.esccom.applicantCategory
+  );
+
+  const categorySelections = useAppSelector(
+    (state) => state.esccom.categorySelections
+  );
+
+  /*
+   * ================================
+   * DYNAMIC STEPS
+   * ================================
+   */
+
+  const steps: DynamicStep[] = useMemo(
+    () =>
+      getDynamicSteps(
+        categorySelections,
+        applicantCategory
+      ),
+    [applicantCategory, categorySelections]
+  );
+
+  const totalSteps = steps.length;
+
+  /*
+   * ================================
+   * FETCH DEPARTMENTS
+   * ================================
+   */
 
   useEffect(() => {
-    dispatch(clearStates());
-
-    fetchConsultancyDepartment();
+    dispatch(fetchDepartments());
   }, [dispatch]);
 
-
-  const fetchConsultancyDepartment = async (): Promise<void> => {
-    try {
-      const res = await api.get("/dep");
-
-      console.log("Departments Response:", res);
-
-      const departments = res.data?.data || [];
-
-      const consultancyDept = departments.find(
-        (dept: { name?: string }) =>
-          dept.name?.toLowerCase() === "consultancy"
-      );
-
-      if (consultancyDept) {
-        console.log(
-          "Consultancy Department:",
-          consultancyDept
-        );
-
-        dispatch(setDepartment(consultancyDept));
-      } else {
-        console.warn(
-          "Consultancy department not found."
-        );
-      }
-    } catch (error) {
-      console.error(
-        "Consultancy department fetch error:",
-        error
-      );
-    }
-  };
-
-
-  /* ====================================================
-     REDUX DATA
-  ==================================================== */
-
-  const applicantCategory = useAppSelector(
-    (state) =>
-      state.esccom.categorySelections
-        ?.category?.applicantType
-  );
-
-  const formData = useAppSelector(
-    (state) => state.esccom
-  );
-
-  const {
-    loading,
-    success,
-    error,
-  } = formData;
-
-
-  /* ====================================================
-     SUBMIT
-  ==================================================== */
-
-  const handleSubmit = (): void => {
-    dispatch(submitServiceForm());
-  };
-
-
-  /* ====================================================
-     ACTIVE STEPS
-  ==================================================== */
-
-  const activeSteps = useMemo(
-    () => ALL_STEPS,
-    []
-  );
-
-  const totalSteps = activeSteps.length;
-
-
-  /* ====================================================
-     PROTECT STEP NUMBER
-  ==================================================== */
+  /*
+   * ================================
+   * KEEP STEP VALID
+   * ================================
+   */
 
   useEffect(() => {
+    if (totalSteps === 0) {
+      setStep(1);
+      return;
+    }
+
     if (step > totalSteps) {
       setStep(totalSteps);
     }
-  }, [step, totalSteps]);
+  }, [totalSteps, step]);
 
+  /*
+   * ================================
+   * RESET SUBMISSION STATUS
+   * ================================
+   */
 
-  /* ====================================================
-     CURRENT COMPONENT
-  ==================================================== */
+  useEffect(() => {
+    dispatch(resetSubmitStatus());
+  }, [dispatch]);
 
-  const currentComponent =
-    activeSteps[step - 1]?.component;
+  /*
+   * ================================
+   * CURRENT STEP
+   * ================================
+   */
 
+  const currentStepData = steps[step - 1];
 
-  /* ====================================================
-     NEXT BUTTON VALIDATION
-  ==================================================== */
+  if (!currentStepData) {
+    return null;
+  }
 
-  const isNextDisabled =
-    step === 2 && !applicantCategory;
+  const CurrentComponent = currentStepData.component;
 
+  /*
+   * ================================
+   * CONTINUE / SUBMIT
+   * ================================
+   */
 
-  /* ====================================================
-     RENDER
-  ==================================================== */
+  const handleContinueButtonClick = async () => {
+    if (step === totalSteps) {
+      if (isSubmitting) return;
 
-  return (
-    <div className="flex h-screen overflow-hidden bg-gray-100">
+      setIsSubmitting(true);
 
-      {/* ==================================================
-          SIDEBAR
-      ================================================== */}
+      try {
+        await dispatch(submitServiceForm()).unwrap();
+      } catch (error) {
+        console.error(
+          "Consultancy form submission failed:",
+          error
+        );
+      } finally {
+        setIsSubmitting(false);
+      }
 
-      <aside className="hidden md:flex w-64 bg-white border-r flex-col">
+      return;
+    }
 
-        {/* Sidebar Header */}
-        <div className="p-5 border-b">
-          <h1 className="text-xl font-bold">
-            ATTPL CONSULTANCY
-          </h1>
+    setStep((prev) => prev + 1);
+  };
 
-          <p className="text-xs text-gray-500 mt-1">
-            Consultancy Registration
-          </p>
-        </div>
+  /*
+   * ================================
+   * RENDER
+   * ================================
+   */
 
+return (
+  <>
+    {/* ================================
+        SUCCESS / ERROR DIALOG
+    ================================= */}
 
-        {/* Scrollable Sidebar */}
-        <div className="flex-1 overflow-y-auto p-3 space-y-2">
+    <SuccessDialog
+      open={
+        submitStatus === "succeeded" ||
+        submitStatus === "failed"
+      }
+      type={
+        submitStatus === "failed"
+          ? "error"
+          : "success"
+      }
+      message={
+        submitStatus === "failed"
+          ? submitError ??
+            "We could not submit your consultancy application. Please try again."
+          : undefined
+      }
+      onClose={() =>
+        dispatch(resetSubmitStatus())
+      }
+    />
 
-          {activeSteps.map((item, index) => {
+    {/* ================================
+        MAIN PAGE
+    ================================= */}
 
-            const isActive =
-              step === index + 1;
+    <div className="min-h-screen bg-[#F8F8F6]">
+      <div className="flex h-screen">
 
-            return (
-              <button
-                key={item.key}
-                type="button"
-                onClick={() =>
-                  setStep(index + 1)
-                }
-                className={`w-full text-left p-3 rounded-lg cursor-pointer transition ${
-                  isActive
-                    ? "bg-sky-500 text-white"
-                    : "hover:bg-sky-100"
-                }`}
-              >
-                <div className="text-xs">
-                  Step {index + 1}
-                </div>
+        {/* =========================================
+            SIDEBAR
+        ========================================= */}
 
-                <div className="text-sm font-medium">
-                  {item.label}
-                </div>
-              </button>
-            );
-          })}
+        <aside className="hidden lg:flex w-100 bg-white border-r border-[#E5E5E5] flex-col overflow-hidden">
 
-        </div>
+          {/* LOGO / BRAND */}
 
-      </aside>
+          <div className="p-6 border-b border-[#E5E5E5]">
 
+            <h2 className="text-xl font-bold text-[#111111]">
+              ATTPL Consultancy
+            </h2>
 
-      {/* ==================================================
-          MAIN CONTENT
-      ================================================== */}
+            <p className="text-sm text-[#6B7280] mt-1">
+              Consultancy Service Request Form
+            </p>
 
-      <div className="flex-1 flex flex-col h-full bg-white">
+            <p className="text-sm text-[#6B7280] mt-1">
+              ATTPL Consultancy Marketplace &
+              Partner Network™
+            </p>
 
+            <div className="flex items-center gap-2 font-medium mt-2">
 
-        {/* ==================================================
-            MOBILE STEP BAR
-        ================================================== */}
+              <span className="text-[#111111]">
+                विशेषज्ञ सलाह
+              </span>
 
-        <div className="md:hidden bg-white border-b overflow-x-auto">
+              <span className="text-[#D1D5DB]">
+                •
+              </span>
 
-          <div className="flex gap-2 p-2">
+              <span className="text-[#C9A227]">
+                Trusted Consultancy Support
+              </span>
 
-            {activeSteps.map((item, index) => (
-
-              <button
-                key={item.key}
-                type="button"
-                onClick={() =>
-                  setStep(index + 1)
-                }
-                className={`px-3 py-1 text-xs rounded whitespace-nowrap ${
-                  step === index + 1
-                    ? "bg-sky-600 text-white"
-                    : "bg-gray-200"
-                }`}
-              >
-                {index + 1}
-              </button>
-
-            ))}
+            </div>
 
           </div>
 
-        </div>
+          {/* =========================================
+              STEPS
+          ========================================= */}
 
+          <div className="flex-1 overflow-y-auto py-5">
 
-        {/* ==================================================
-            HEADER
-        ================================================== */}
+            {steps.map((s, index) => {
 
-        <Header />
+              const stepNumber = index + 1;
 
+              const active =
+                step === stepNumber;
 
-        {/* ==================================================
-            PROGRESS BAR
-        ================================================== */}
+              const completed =
+                stepNumber < step;
 
-        <div className="px-4 sm:px-6 pt-4">
+              return (
+                <button
+                  key={s.id}
+                  type="button"
+                  onClick={() =>
+                    setStep(stepNumber)
+                  }
+                  className={`
+                    w-full
+                    flex
+                    items-center
+                    gap-4
+                    px-6
+                    py-3
+                    transition-all
+                    duration-200
 
-          <ProgressBar
-            step={step}
-            total={totalSteps}
-          />
+                    ${
+                      active
+                        ? "bg-[#111111] text-white shadow-md"
+                        : "text-[#6B7280] hover:bg-[#F7F1D7] hover:text-[#111111]"
+                    }
+                  `}
+                >
 
-        </div>
+                  {/* STEP NUMBER */}
 
+                  <div
+                    className={`
+                      w-9
+                      h-9
+                      rounded-full
+                      flex
+                      items-center
+                      justify-center
+                      font-semibold
+                      shrink-0
 
-        {/* ==================================================
-            TOP ACCENT LINE
-        ================================================== */}
+                      ${
+                        active
+                          ? "bg-[#C9A227] text-white"
+                          : completed
+                            ? "bg-[#F7F1D7] text-[#111111]"
+                            : "border border-[#E5E5E5] text-[#9CA3AF]"
+                      }
+                    `}
+                  >
+                    {completed
+                      ? "✓"
+                      : stepNumber}
+                  </div>
 
-        <div className="h-1 bg-sky-400 mt-3" />
+                  {/* STEP TITLE */}
 
+                  <span className="text-sm font-medium text-left">
+                    {s.title}
+                  </span>
 
-        {/* ==================================================
-            FORM CONTENT
-        ================================================== */}
+                </button>
+              );
+            })}
 
-        <div className="flex-1 overflow-y-auto p-4 sm:p-6">
+          </div>
 
-          {currentComponent}
+          {/* SIDEBAR FOOTER */}
 
-        </div>
+          <div className="border-t border-[#E5E5E5] p-5">
 
+            <p className="text-sm text-[#6B7280]">
+              Step {step} of {totalSteps}
+            </p>
 
-        {/* ==================================================
-            FOOTER
-        ================================================== */}
+          </div>
 
-        <div className="border-t px-4 sm:px-6 py-4 bg-white">
+        </aside>
 
-          <div className="flex flex-col sm:flex-row justify-between items-center gap-3">
+        {/* =========================================
+            MAIN CONTENT
+        ========================================= */}
 
+        <main className="flex-1 flex flex-col overflow-hidden">
 
-            {/* BACK */}
-            <button
-              type="button"
-              disabled={step === 1}
-              onClick={() =>
-                setStep((current) =>
-                  Math.max(current - 1, 1)
-                )
-              }
-              className="w-full sm:w-auto px-5 py-2 border rounded disabled:opacity-50 disabled:cursor-not-allowed"
-            >
-              Back
-            </button>
+          {/* HEADER */}
 
+          <Header />
 
-            {/* STEP COUNTER */}
-            <span className="text-sm text-gray-500">
-              Step {step} / {totalSteps}
-            </span>
+          {/* PROGRESS */}
 
+          <div className="bg-white border-b border-[#E5E5E5] px-6 py-3">
 
-            {/* NEXT / SUBMIT */}
+            <ProgressBar
+              step={step}
+              total={totalSteps}
+            />
 
-            {step === totalSteps ? (
+          </div>
+
+          {/* FORM CONTENT */}
+
+          <div className="flex-1 overflow-y-auto p-6">
+
+            <div className="max-w-6xl mx-auto">
+
+              <CurrentComponent />
+
+            </div>
+
+          </div>
+
+          {/* =========================================
+              FOOTER
+          ========================================= */}
+
+          <div className="bg-white border-t border-[#E5E5E5] p-5">
+
+            <div className="max-w-6xl mx-auto flex flex-col sm:flex-row justify-between gap-3">
+
+              {/* PREVIOUS */}
 
               <button
                 type="button"
-                onClick={handleSubmit}
-                disabled={loading}
-                className="w-full sm:w-auto px-6 py-2 bg-green-500 text-white rounded disabled:opacity-50"
-              >
-                {loading
-                  ? "Submitting..."
-                  : "Submit"}
-              </button>
-
-            ) : (
-
-              <button
-                type="button"
-                disabled={isNextDisabled}
+                disabled={step === 1}
                 onClick={() =>
-                  setStep((current) =>
-                    Math.min(
-                      current + 1,
-                      totalSteps
-                    )
+                  setStep((prev) =>
+                    Math.max(prev - 1, 1)
                   )
                 }
-                className="w-full sm:w-auto px-6 py-2 bg-sky-500 text-white rounded disabled:opacity-50 disabled:cursor-not-allowed"
+                className="
+                  px-6
+                  py-3
+                  rounded-lg
+                  border
+                  border-[#D1D5DB]
+                  text-[#222222]
+                  hover:bg-[#F7F1D7]
+                  hover:border-[#C9A227]
+                  disabled:opacity-50
+                  disabled:cursor-not-allowed
+                  transition-all
+                  duration-200
+                "
               >
-                Next
+                Previous
               </button>
 
-            )}
+              {/* CONTINUE / SUBMIT */}
+
+              {step === totalSteps ? (
+
+                <button
+                  type="button"
+                  onClick={
+                    handleContinueButtonClick
+                  }
+                  disabled={isSubmitting}
+                  className="
+                    px-8
+                    py-3
+                    rounded-lg
+                    bg-[#111111]
+                    hover:bg-[#2B2B2B]
+                    text-white
+                    border
+                    border-[#111111]
+                    transition-all
+                    duration-200
+                    disabled:opacity-60
+                    disabled:cursor-not-allowed
+                  "
+                >
+                  {isSubmitting
+                    ? "Submitting..."
+                    : "Submit Consultancy Application"}
+                </button>
+
+              ) : (
+
+                <button
+                  type="button"
+                  onClick={
+                    handleContinueButtonClick
+                  }
+                  className="
+                    px-8
+                    py-3
+                    rounded-lg
+                    bg-[#111111]
+                    hover:bg-[#2B2B2B]
+                    text-white
+                    border
+                    border-[#111111]
+                    transition-all
+                    duration-200
+                  "
+                >
+                  Continue
+                </button>
+
+              )}
+
+            </div>
 
           </div>
 
-        </div>
-
-
-        {/* ==================================================
-            STATUS
-        ================================================== */}
-
-        {success && (
-          <p className="text-green-600 text-center py-2">
-            Submitted successfully ✅
-          </p>
-        )}
-
-        {error && (
-          <p className="text-red-600 text-center py-2">
-            {error}
-          </p>
-        )}
+        </main>
 
       </div>
-
     </div>
-  );
+  </>
+);
 }
+

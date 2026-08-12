@@ -37,7 +37,7 @@ export default function CTA() {
   Explore Marketplace
 </Link>
 <Link
-  href="/service-form"
+  href="/conatct"
   className="group flex items-center gap-2 rounded-xl border border-slate-300 bg-white px-7 py-3 font-semibold text-[#0B1B3A] transition hover:border-yellow-400 hover:text-yellow-600"
 >
   Contact Expert

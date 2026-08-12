@@ -10,7 +10,7 @@ const categories = [
     id: 1,
     title: "Business Consulting",
     subtitle: "Strategy • Growth • Transformation",
-    image: "/marketplace/bs.jpg",
+    image: "/marketplace/businessconsultancy.jpg",
     services: [
       "Business Strategy",
       "Corporate Advisory",

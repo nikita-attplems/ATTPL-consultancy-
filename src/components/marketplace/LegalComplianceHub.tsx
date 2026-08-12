@@ -1,13 +1,14 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { FiArrowRight } from "react-icons/fi";
 
 type Service = {
   category: string;
   title: string;
   description: string;
-  highlight: string;
+ 
   image: string;
 };
 
@@ -17,23 +18,23 @@ const services: Service[] = [
     title: "Business Legal Advisory",
     description:
       "Expert legal consultation for contracts, agreements, business structuring and corporate governance.",
-    highlight: "Legal Experts",
-    image: "/marketplace/cr.jpg",
+
+    image: "/marketplace/businessconsultancy.jpg",
   },
   {
     category: "CA & Accounting",
     title: "Accounting & Financial Planning",
     description:
       "Professional accounting, audits, bookkeeping, financial reporting and strategic advisory.",
-    highlight: "CA Services",
-    image: "/marketplace/ca.jpg",
+
+    image: "/marketplace/pp.jpg",
   },
   {
     category: "GST & Taxation",
     title: "GST Registration & Tax Filing",
     description:
       "GST registration, return filing, tax planning and complete compliance management.",
-    highlight: "100% Compliance",
+    
     image: "/marketplace/gst.jpg",
   },
   {
@@ -41,7 +42,7 @@ const services: Service[] = [
     title: "Start & Register Your Business",
     description:
       "Private Limited, LLP, OPC, MSME, Startup India and complete incorporation services.",
-    highlight: "Business Setup",
+   
     image: "/marketplace/companyreg.jpg",
   },
   {
@@ -49,15 +50,15 @@ const services: Service[] = [
     title: "Contracts & Documentation",
     description:
       "Professional drafting, agreements, legal notices, verification and documentation support.",
-    highlight: "Verified Documents",
-    image: "/marketplace/legaldoc.jpg",
+   
+    image: "/marketplace/contract.jpg",
   },
   {
     category: "Compliance",
     title: "Regulatory Compliance",
     description:
       "ROC filings, annual compliance, statutory requirements and ongoing regulatory assistance.",
-    highlight: "Year Round Support",
+   
     image: "/marketplace/complaince.jpg",
   },
 ];
@@ -94,10 +95,6 @@ export default function LegalComplianceHub() {
               taxation, accounting and complete corporate advisory services.
             </p>
 
-            <button className="mt-10 flex items-center gap-3 rounded-xl bg-blue-600 px-7 py-4 font-semibold text-white transition hover:bg-blue-700">
-              Hire CA & Legal Experts
-              <FiArrowRight />
-            </button>
 
           </div>
 
@@ -200,13 +197,28 @@ export default function LegalComplianceHub() {
                   </p>
 
                   {/* Highlight */}
-                  <div className="mt-6 text-4xl font-bold leading-none text-blue-600">
+                  {/* <div className="mt-6 text-4xl font-bold leading-none text-blue-600">
                     {service.highlight}
-                  </div>
+                  </div> */}
+
+                  <div className="mt-12 flex justify-center">
+  <Link
+    href="/service-form"
+    className="group inline-flex items-center justify-center gap-4 rounded-full border border-[#13263F] bg-transparent px-7 py-3.5 text-base font-medium text-[#13263F] transition-all duration-300 "
+  >
+    <span>Find the Right Service</span>
+
+    <FiArrowRight
+      className="text-lg transition-transform duration-300 group-hover:translate-x-1"
+    />
+  </Link>
+</div>
 
 
                 </div>
+                
               </article>
+              
             ))}
 
           </div>

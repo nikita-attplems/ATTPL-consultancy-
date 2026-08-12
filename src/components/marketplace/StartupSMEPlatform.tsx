@@ -181,25 +181,7 @@ export default function StartupSMEPlatform() {
               mentors, technology partners, and growth solutions.
             </p>
 
-            <button
-              className="
-                mt-8
-                flex items-center gap-3
-                rounded-xl
-                bg-blue-600
-                px-7 py-4
-                font-semibold
-                text-white
-                shadow-lg
-                shadow-blue-200
-                transition-all
-                hover:bg-blue-700
-                hover:shadow-xl
-              "
-            >
-              Connect With Startup Experts
-              <FiArrowRight />
-            </button>
+           
           </div>
         </div>
 

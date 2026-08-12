@@ -12,6 +12,7 @@ import Ecosystem from "@/components/Home/Ecosystem";
 import Industries from "@/components/Home/Industries";
 import CTA from "@/components/common/CTA";
 import FAQ from "@/components/common/FAQ";
+import Founder from "@/components/Home/Founder";
 
 const App = () => {
   return (
@@ -19,6 +20,7 @@ const App = () => {
       <Hero />
 
       <About />
+      <Founder/>
 
       <Ecosystem />
       <Industries />

@@ -1,52 +1,82 @@
+
+"use client";
+
 import Image from "next/image";
 
 export default function Header() {
   return (
-    <div className="text-center px-4 py-2 border-b border-sky-100 bg-white">
+    <header className="w-full bg-white border-b border-slate-200 shadow-sm">
+      <div className="max-w-7xl mx-auto px-2 py-2 text-center">
 
-      {/* Logo */}
-      <div className="flex justify-center">
-        <Image
-          src="/imgs/ATTPL-Group-Logo.gif"
-          alt="ATTPL"
-          width={85}
-          height={85}
-          priority
-          className="object-contain"
-        />
-      </div>
+        {/* Logo */}
+        <div className="flex justify-center">
+          <div className="w-28 h-28 rounded-full overflow-hidden">
+            <Image
+              src="/logo/logo-crop.gif"
+              alt="ATTPL Logo"
+              width={112}
+              height={112}
+              unoptimized
+              className="w-full h-full object-cover"
+            />
+          </div>
+        </div>
 
-      {/* Title */}
-      <h1 className="mt-2 text-2xl md:text-3xl font-bold tracking-tight text-slate-900">
-        ATTPL HOLDCO
-      </h1>
+        {/* Company */}
+        <h1 className="mt-1 text-xl sm:text-2xl font-bold text-slate-900">
+          ATTPL HOLDCO
+        </h1>
 
-<h1 className="mt-1 text-xl md:text-xl font-bold tracking-tight text-slate-900">
-        ATTPL HEALTHCARE MARKETPLACE & HEALTHTECH ECOSYSTEM
+        {/* Consultancy Platform */}
+        <h2 className="mt-1 text-sm sm:text-base md:text-lg font-semibold text-slate-700">
+          ATTPL Consultancy & Strategic Advisory Network™
+        </h2>
 
-      </h1>
+        {/* Hindi + English Tagline */}
+        <div className="mt-1 flex justify-center flex-wrap gap-2 text-sm sm:text-base md:text-lg font-semibold">
 
-      {/* Subtitle */}
-      <p className="text-gray-500 mt-1 text-xs md:text-base">
-        Choose ATTPL for the Best Service
-      </p>
+          <span className="text-[#0B1F3A]">
+            परामर्श और रणनीतिक मार्गदर्शन
+          </span>
 
-      {/* Tagline
-      <p className="text-xs md:text-sm text-gray-400 mt-3 leading-relaxed max-w-2xl mx-auto">
-        One Citizen • One Business • One Government • One Investor • One HealthHub
-      </p> */}
+          <span className="text-slate-300">
+            •
+          </span>
 
-      {/* Description */}
-      <p className="text-sm text-slate-600 mt-3 font-medium">
-  ATTPL means- तुरंत “Instant” — The World’s First Instant Enterprise  Ecosystem.
-</p>
-      {/* Note */}
-      <div className="mt-4 inline-block rounded-full bg-sky-50 px-4 py-2">
-        <p className="text-xs text-sky-700">
-          You can skip optional fields and continue anytime.
+          <span className="text-[#C9A227]">
+            Trusted Consultancy
+          </span>
+
+        </div>
+
+        {/* Description */}
+        <p className="mt-3 max-w-4xl mx-auto text-xs sm:text-sm md:text-base text-slate-600 leading-relaxed">
+
+          <span className="font-semibold text-[#0B1F3A]">
+            ATTPL Consultancy & Strategic Advisory Network™
+          </span>{" "}
+          connects businesses, organizations, professionals, leaders,
+          institutions, and strategic partners with trusted consultancy
+          and advisory services—helping organizations make informed
+          decisions, improve performance, manage projects, and achieve
+          sustainable growth.
+
         </p>
-      </div>
 
-    </div>
+        {/* Notice */}
+        <div className="mt-4 flex justify-center">
+
+          <div className="rounded-full bg-[#F8F1DD] border border-[#C9A227]/40 px-4 py-2 text-xs sm:text-sm text-[#0B1F3A]">
+
+            One Client • One Advisory Profile • One Partner Network •
+            One Consultancy Marketplace™
+
+          </div>
+
+        </div>
+
+      </div>
+    </header>
   );
 }
+

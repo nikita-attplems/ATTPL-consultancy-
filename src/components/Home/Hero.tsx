@@ -3,6 +3,8 @@ import React, { useState, useEffect, useRef } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import Image from "next/image";
+import { FiArrowRight } from "react-icons/fi";
+import Link from "next/link";
 
 const Hero = () => {
   const headlines = [
@@ -117,23 +119,17 @@ const Hero = () => {
             </h1>
           </div>
 
-          <p className="text-[#f0f0f0] text-lg font-medium leading-relaxed max-w-[80%] mx-auto mb-6">
-            ATTPL Consultancy provides bespoke Political, Legal, and Corporate
-            solutions. Navigating complexity so you can focus on growth.
-          </p>
+         <p className="text-[#f0f0f0] text-lg font-medium leading-relaxed max-w-[80%] mx-auto">
+  ATTPL Consultancy provides bespoke Political, Legal, and Corporate
+  solutions. Navigating complexity so you can focus on growth.
+</p>
+
+
+
+{/* Slider Dots Indicator */}
 
           {/* Slider Dots Indicator */}
-          <div className="flex justify-center gap-3">
-            {headlines.map((_, index) => (
-              <span
-                key={index}
-                className={`h-2 rounded-full cursor-pointer transition-all duration-300 ${index === currentIndex ? "bg-accent w-6" : "bg-gray-300 w-2"}`}
-                onClick={(e: React.MouseEvent<HTMLButtonElement>) =>
-                  changeSlide(index)
-                }
-              ></span>
-            ))}
-          </div>
+        
         </div>
       </div>
     </section>

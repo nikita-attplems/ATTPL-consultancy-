@@ -10,7 +10,7 @@ const resources = [
     id: 1,
     type: "CASE STUDY",
     title: "How strategic legal advisory transformed a growing enterprise",
-    image:"/marketplace/legaldoc.jpg",
+    image:"/marketplace/legal.jpg",
     featured: true,
   },
   {
@@ -24,7 +24,7 @@ const resources = [
     id: 3,
     type: "INSIGHT",
     title: "Future-ready business strategies in a digital economy",
-    image:"/marketplace/bs.jpg",
+    image:"/marketplace/businessstrategy.jpg",
      
   },
   {

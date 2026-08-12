@@ -25,7 +25,7 @@ const Services = () => {
       description:
         "Business strategy, operational excellence, market expansion, and organizational performance improvement.",
       color: "#EF5350",
-      image: "/marketplace/bs.jpg",
+      image: "/marketplace/businessconsultancy.jpg",
       link: "/services/business-consulting",
     },
     {
@@ -45,7 +45,7 @@ const Services = () => {
       description:
         "ISO certifications, quality management, environmental standards, and regulatory certification services.",
       color: "#00B8D9",
-      image: "/marketplace/cr.jpg",
+      image: "/marketplace/certification.jpg",
       link: "/services/certification-services",
     },
     {
@@ -65,7 +65,7 @@ const Services = () => {
       description:
         "Government subsidy identification, documentation, application support, and incentive advisory.",
       color: "#F2C94C",
-      image: "/services/ps.jpg",
+      image: "/marketplace/ps.jpg",
       link: "/services/subsidy-consulting",
     },
     {
@@ -105,7 +105,7 @@ const Services = () => {
       description:
         "Digital strategy, AI, automation, ERP implementation, and enterprise transformation.",
       color: "#7E57C2",
-      image: "/marketplace/technology.jpg",
+      image: "/marketplace/dt.jpg",
       link: "/services/digital-transformation",
     },
   ];
@@ -156,12 +156,12 @@ const Services = () => {
 
     <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent" />
 
-    <div
+    {/* <div
       className="absolute left-5 top-5 flex h-12 w-12 items-center justify-center rounded-full text-sm font-bold text-black shadow-lg"
       style={{ backgroundColor: service.color }}
     >
       {String(service.id).padStart(2, "0")}
-    </div>
+    </div> */}
 
     <div
       className="absolute bottom-0 left-0 h-1 w-0 transition-all duration-500 group-hover:w-full"

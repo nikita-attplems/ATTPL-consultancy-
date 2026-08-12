@@ -229,12 +229,13 @@ export default function ContactPage() {
                 Schedule a consultation with our experienced professionals and
                 discover solutions tailored to your business objectives.
               </p>
-
-              <button className="group mt-8 flex items-center gap-3 rounded-xl bg-white px-6 py-3 font-semibold text-blue-600 transition-all duration-300 hover:bg-black hover:text-white">
-                Book Consultation
-
-                <FiArrowRight className="transition-transform duration-300 group-hover:translate-x-1" />
-              </button>
+<a
+  href="#contact"
+  className="group mt-8 flex items-center gap-3 rounded-xl bg-white px-6 py-3 font-semibold text-blue-600 transition-all duration-300 hover:bg-black hover:text-white"
+>
+  Book Consultation
+  <FiArrowRight className="transition-transform duration-300 group-hover:translate-x-1" />
+</a>
             </div>
           </div>
         </div>

@@ -1,9 +1,12 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
+import { FiArrowRight } from "react-icons/fi";
 
 import Marquee from "react-fast-marquee";
 import "swiper/css";
+import Button from "../ui/Button";
 
 const industries = [
   {
@@ -64,17 +67,16 @@ export default function Industries() {
   return (
     <section className="bg-[#FFFDF8] py-[CLAMP(4REM,8VH,8REM)]">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
-        {/* Header */}
-        <div className="grid gap-12 lg:grid-cols-2">
-          <div>
-            <h2 className="mt-4 text-[clamp(2.5rem,5vw,4.5rem)] font-light text-blue-600 leading-NONE">
-              Industries
-              <span className="block font-semibold">We Serve</span>
-            </h2>
-          </div>
-
-         
-        </div>
+     
+    {/* Header */}
+<div className="text-center">
+  <h2 className="mt-4 text-[clamp(2.2rem,5vw,4.5rem)] font-light leading-none text-blue-600">
+    Industries{" "}
+    <span className="font-semibold">
+      We Serve
+    </span>
+  </h2>
+</div>
 
         {/* Divider */}
         <div className="my-14 border-t border-gray-300" />
@@ -94,25 +96,29 @@ export default function Industries() {
         </Marquee>
 
         {/* Second Row */}
-        <div className="mt-5">
-          <Marquee
-            speed={18}
-            gradient={false}
-            direction="right"
-            pauseOnHover={true}
-          >
-            <div className="flex gap-4 pr-4">
-              {industries.slice(7).map((industry) => (
-                <div
-                  key={industry.title}
-                  className="w-[clamp(240px,28vw,380px)] flex-shrink-0"
-                >
-                  <IndustryCard industry={industry} />
-                </div>
-              ))}
-            </div>
-          </Marquee>
+     {/* Second Row */}
+<div className="mt-5">
+  <Marquee
+    speed={18}
+    gradient={false}
+    direction="right"
+    pauseOnHover={true}
+  >
+    <div className="flex gap-4 pr-4">
+      {industries.slice(7).map((industry) => (
+        <div
+          key={industry.title}
+          className="w-[clamp(240px,28vw,380px)] flex-shrink-0"
+        >
+          <IndustryCard industry={industry} />
         </div>
+      ))}
+    </div>
+  </Marquee>
+</div>
+
+
+        
       </div>
     </section>
   );
@@ -138,6 +144,8 @@ function IndustryCard({ industry }: { industry: Industry }) {
       <h3 className="absolute bottom-4 left-4 text-[clamp(16px,1.4vw,22px)] font-semibold text-white">
         {industry.title}
       </h3>
+
+      
     </div>
   );
 }
