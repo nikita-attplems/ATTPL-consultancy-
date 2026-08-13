@@ -35,64 +35,62 @@ const steps = [
 
 export default function HowItWorks() {
   return (
-    <section className="bg-[#F8FAFC] py-24">
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        {/* Heading */}
+   <section className="bg-background py-24">
+  <div className="mx-auto max-w-7xl px-6 lg:px-8">
 
-        <div className="mx-auto mb-20 max-w-3xl text-center">
-          <span className="inline-flex items-center rounded-full border border-slate-200 bg-white px-4 py-2 text-xs font-semibold uppercase tracking-[0.25em] text-slate-600">
-            HOW IT WORKS
-          </span>
+    {/* Heading */}
+    <div className="mx-auto mb-20 max-w-3xl text-center">
+      <span className="inline-flex items-center rounded-full border border-border bg-surface px-4 py-2 text-xs font-semibold uppercase tracking-[0.25em] text-text-secondary">
+        HOW IT WORKS
+      </span>
 
-          <h2 className="mt-5 text-5xl font-bold text-slate-900">
-            A Simple Four-Step Process
-          </h2>
+      <h2 className="mt-5 text-5xl font-bold text-primary">
+        A Simple Four-Step Process
+      </h2>
 
-          <p className="mt-5 text-lg text-slate-600">
-            Getting started with ATTPL is straightforward. Follow these simple
-            steps to connect with the right consulting experts.
-          </p>
-        </div>
+      <p className="mt-5 text-lg text-text-secondary">
+        Getting started with ATTPL is straightforward. Follow these simple
+        steps to connect with the right consulting experts.
+      </p>
+    </div>
 
-        {/* Process */}
+    {/* Process */}
+    <div className="relative grid gap-12 md:grid-cols-2 xl:grid-cols-4">
 
-        <div className="relative grid gap-12 md:grid-cols-2 xl:grid-cols-4">
-          {/* Connecting Line */}
-          <div className="absolute left-[12%] right-[12%] top-10 hidden h-[2px] bg-slate-200 xl:block" />
+      {/* Connecting Line */}
+      <div className="absolute left-[12%] right-[12%] top-10 hidden h-px bg-border xl:block" />
 
-          {steps.map((step) => {
-            const Icon = step.icon;
+      {steps.map((step) => {
+        const Icon = step.icon;
 
-            return (
-              <div key={step.id} className="relative text-center">
-                {/* Circle */}
+        return (
+          <div key={step.id} className="relative text-center">
 
-                <div className="relative z-10 mx-auto flex h-20 w-20 items-center justify-center rounded-full border-8 border-[#F8FAFC] bg-[#FBB040] shadow-lg">
-                  <Icon className="text-3xl text-white" />
-                </div>
+            {/* Circle */}
+            <div className="relative z-10 mx-auto flex h-20 w-20 items-center justify-center rounded-full border-8 border-background bg-gold shadow-lg transition-all duration-300 hover:scale-105">
+              <Icon className="text-3xl text-white" />
+            </div>
 
-                {/* Step */}
+            {/* Step */}
+            <p className="mt-6 text-xs font-bold uppercase tracking-[0.4em] text-gold">
+              Step {step.id}
+            </p>
 
-                <p className="mt-6 text-xs font-bold uppercase tracking-[0.4em] text-[#FBB040]">
-                  Step {step.id}
-                </p>
+            {/* Title */}
+            <h3 className="mt-3 text-2xl font-bold text-primary">
+              {step.title}
+            </h3>
 
-                {/* Title */}
+            {/* Description */}
+            <p className="mt-4 leading-7 text-text-secondary">
+              {step.description}
+            </p>
 
-                <h3 className="mt-3 text-2xl font-bold text-slate-900">
-                  {step.title}
-                </h3>
-
-                {/* Description */}
-
-                <p className="mt-4 leading-7 text-slate-600">
-                  {step.description}
-                </p>
-              </div>
-            );
-          })}
-        </div>
-      </div>
-    </section>
+          </div>
+        );
+      })}
+    </div>
+  </div>
+</section>
   );
 }

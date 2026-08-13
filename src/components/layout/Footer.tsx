@@ -20,17 +20,17 @@ if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
 }
 
+/* ================= QUICK LINKS ================= */
+
 const quickLinks = [
   {
     name: "Home",
     href: "/",
   },
-
   {
     name: "Experts",
     href: "/marketplace",
   },
-
   {
     name: "About Us",
     href: "/about",
@@ -40,6 +40,9 @@ const quickLinks = [
     href: "/contact",
   },
 ];
+
+/* ================= PLATFORMS ================= */
+
 const platforms = [
   {
     name: "ATTPL Group",
@@ -66,6 +69,65 @@ const platforms = [
     href: "https://finance.attplgroup.com/",
   },
 ];
+
+/* ================= MARKETPLACE ================= */
+
+const marketplaceApiLinks = [
+  {
+    name: "Marketplace Seller Policy",
+    href: "/policies/marketplace-seller-policy",
+  },
+  {
+    name: "API Usage Policy",
+    href: "/policies/api-usage-policy",
+  },
+];
+
+/* ================= TRANSPARENCY ================= */
+
+const transparencyLinks = [
+  {
+    name: "Transparency Report",
+    href: "/policies/transparency-report",
+  },
+  {
+    name: "Government & Regulatory Requests Policy",
+    href: "/policies/government-regulatory-requests-policy",
+  },
+];
+
+/* ================= SUSTAINABILITY ================= */
+
+const sustainabilityLinks = [
+  {
+    name: "Responsible Agriculture Charter",
+    href: "/policies/responsible-agriculture-charter",
+  },
+  {
+    name: "ESG & Sustainability Policy",
+    href: "/policies/esg-sustainability-policy",
+  },
+];
+
+/* ================= SUPPORT ================= */
+
+const supportGovernanceLinks = [
+  {
+    name: "Community Guidelines",
+    href: "/policies/community-guidelines",
+  },
+  {
+    name: "Grievance Redressal Policy",
+    href: "/policies/grievance-redressal-policy",
+  },
+  {
+    name: "Contact & Support Policy",
+    href: "/policies/contact-support-policy",
+  },
+];
+
+/* ================= INTELLECTUAL PROPERTY ================= */
+
 const intellectualPropertyLinks = [
   {
     name: "Copyright Policy",
@@ -84,6 +146,9 @@ const intellectualPropertyLinks = [
     href: "/policies/research-scientific-content-policy",
   },
 ];
+
+/* ================= AI ================= */
+
 const aiEthicalTechnologyLinks = [
   {
     name: "Responsible AI Policy",
@@ -98,6 +163,9 @@ const aiEthicalTechnologyLinks = [
     href: "/policies/digital-trust-charter",
   },
 ];
+
+/* ================= INFORMATION SECURITY ================= */
+
 const informationSecurityLinks = [
   {
     name: "Enterprise Information Security Policy",
@@ -120,6 +188,9 @@ const informationSecurityLinks = [
     href: "/policies/disaster-recovery-policy",
   },
 ];
+
+/* ================= DATA GOVERNANCE ================= */
+
 const dataGovernanceLinks = [
   {
     name: "Data Governance Framework",
@@ -134,54 +205,9 @@ const dataGovernanceLinks = [
     href: "/policies/farmer-data-rights-charter",
   },
 ];
-const marketplaceApiLinks = [
-  {
-    name: "Marketplace Seller Policy",
-    href: "/policies/marketplace-seller-policy",
-  },
-  {
-    name: "API Usage Policy",
-    href: "/policies/api-usage-policy",
-  },
-];
-
-const sustainabilityLinks = [
-  {
-    name: "Responsible Agriculture Charter",
-    href: "/policies/responsible-agriculture-charter",
-  },
-  {
-    name: "ESG & Sustainability Policy",
-    href: "/policies/esg-sustainability-policy",
-  },
-];
-const transparencyLinks = [
-  {
-    name: "Transparency Report",
-    href: "/policies/transparency-report",
-  },
-  {
-    name: "Government & Regulatory Requests Policy",
-    href: "/policies/government-regulatory-requests-policy",
-  },
-];
-const supportGovernanceLinks = [
-  {
-    name: "Community Guidelines",
-    href: "/policies/community-guidelines",
-  },
-  {
-    name: "Grievance Redressal Policy",
-    href: "/policies/grievance-redressal-policy",
-  },
-  {
-    name: "Contact & Support Policy",
-    href: "/policies/contact-support-policy",
-  },
-];
 
 export default function Footer() {
-  const sectionRef = useRef(null);
+  const sectionRef = useRef<HTMLElement>(null);
 
   useGSAP(
     () => {
@@ -197,114 +223,269 @@ export default function Footer() {
         },
       });
     },
-    { scope: sectionRef },
+    {
+      scope: sectionRef,
+    },
   );
 
   return (
     <footer
       ref={sectionRef}
-      className="bg-[#1B2435] text-white py-16  px-4 border-t border-gray-100  "
+      className="
+        border-t
+        border-[var(--footer-border)]
+        bg-[var(--footer)]
+        px-4
+        py-16
+        text-[var(--footer-text)]
+      "
     >
-      <div className="max-w-7xl mx-auto footer-content">
-        {/* ================= TOP ================= */}
+      <div className="footer-content mx-auto max-w-7xl">
+
+        {/* ========================================================= */}
+        {/* TOP BRAND AREA */}
+        {/* ========================================================= */}
 
         <div className="flex flex-col items-center text-center">
+
+          {/* Logo */}
+
           <Image
-            src="/logo/frame-1.webp"
+            src="/logo/logo-crop.gif"
             alt="ATTPL Logo"
-            width={200}
+            width={300}
             height={80}
-            className="h-20 w-auto object-contain"
+            className="h-25 w-auto object-contain"
             priority
             unoptimized
           />
 
-          <p className="mt-5 max-w-3xl text-lg leading-8 text-gray-500">
+          {/* Description */}
+
+          <p
+            className="
+              mt-5
+              max-w-3xl
+              text-base
+              leading-7
+              text-[var(--footer-secondary)]
+              md:text-lg
+              md:leading-8
+            "
+          >
             Your trusted partner for corporate advisory, business consulting,
             legal solutions, compliance management, certifications, project
             consulting, and enterprise transformation across industries.
           </p>
 
-          <div className="flex items-center justify-center gap-7 mt-8">
+          {/* ========================================================= */}
+          {/* SOCIAL ICONS */}
+          {/* ========================================================= */}
+
+          <div className="mt-8 flex items-center justify-center gap-3">
+
             <a
               href="https://www.facebook.com/attplgroup/"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-[#1877F2] text-2xl hover:scale-110 transition duration-300"
+              aria-label="Facebook"
+              className="
+                flex
+                h-10
+                w-10
+                items-center
+                justify-center
+                rounded-full
+                border
+                border-[var(--footer-border)]
+                text-[var(--footer-secondary)]
+                transition-all
+                duration-300
+                hover:border-[var(--gold)]
+                hover:bg-[var(--gold)]
+                hover:text-white
+              "
             >
               <FaFacebookF />
             </a>
 
             <a
               href="https://www.instagram.com/attpleasylife"
-              className="text-[#E4405F] text-2xl hover:scale-110 transition duration-300"
               target="_blank"
               rel="noopener noreferrer"
+              aria-label="Instagram"
+              className="
+                flex
+                h-10
+                w-10
+                items-center
+                justify-center
+                rounded-full
+                border
+                border-[var(--footer-border)]
+                text-[var(--footer-secondary)]
+                transition-all
+                duration-300
+                hover:border-[var(--gold)]
+                hover:bg-[var(--gold)]
+                hover:text-white
+              "
             >
               <FaInstagram />
             </a>
 
             <a
               href="https://www.linkedin.com/in/ashok-godara-381947261"
-              className="text-[#0A66C2] text-2xl hover:scale-110 transition duration-300"
               target="_blank"
               rel="noopener noreferrer"
+              aria-label="LinkedIn"
+              className="
+                flex
+                h-10
+                w-10
+                items-center
+                justify-center
+                rounded-full
+                border
+                border-[var(--footer-border)]
+                text-[var(--footer-secondary)]
+                transition-all
+                duration-300
+                hover:border-[var(--gold)]
+                hover:bg-[var(--gold)]
+                hover:text-white
+              "
             >
               <FaLinkedinIn />
             </a>
 
             <a
               href="https://x.com/attplgroup"
-              className="text-black text-2xl hover:scale-110 transition duration-300"
               target="_blank"
               rel="noopener noreferrer"
+              aria-label="X"
+              className="
+                flex
+                h-10
+                w-10
+                items-center
+                justify-center
+                rounded-full
+                border
+                border-[var(--footer-border)]
+                text-[var(--footer-secondary)]
+                transition-all
+                duration-300
+                hover:border-[var(--gold)]
+                hover:bg-[var(--gold)]
+                hover:text-white
+              "
             >
               <FaXTwitter />
             </a>
 
             <a
               href="https://www.pinterest.com/attplgroup/"
-              className="text-[#E60023] text-2xl hover:scale-110 transition duration-300"
               target="_blank"
               rel="noopener noreferrer"
+              aria-label="Pinterest"
+              className="
+                flex
+                h-10
+                w-10
+                items-center
+                justify-center
+                rounded-full
+                border
+                border-[var(--footer-border)]
+                text-[var(--footer-secondary)]
+                transition-all
+                duration-300
+                hover:border-[var(--gold)]
+                hover:bg-[var(--gold)]
+                hover:text-white
+              "
             >
               <FaPinterestP />
             </a>
 
             <a
               href="https://www.youtube.com/@attplgroup"
-              className="text-[#FF0000] text-2xl hover:scale-110 transition duration-300"
               target="_blank"
               rel="noopener noreferrer"
+              aria-label="YouTube"
+              className="
+                flex
+                h-10
+                w-10
+                items-center
+                justify-center
+                rounded-full
+                border
+                border-[var(--footer-border)]
+                text-[var(--footer-secondary)]
+                transition-all
+                duration-300
+                hover:border-[var(--gold)]
+                hover:bg-[var(--gold)]
+                hover:text-white
+              "
             >
               <FaYoutube />
             </a>
-          </div>
 
-          {/* Social */}
-          <div className="mt-8 flex items-center gap-7">
-            {/* Keep all your social icons here exactly as they are */}
           </div>
         </div>
 
-        {/* ================= GAP ================= */}
+        {/* ========================================================= */}
+        {/* SPACE */}
+        {/* ========================================================= */}
 
-        <div className="h-20"></div>
+        <div className="h-20" />
 
-        {/* ================= LINKS ================= */}
+        {/* ========================================================= */}
+        {/* FOOTER LINKS */}
+        {/* ========================================================= */}
 
-        <div className="grid grid-cols-2 gap-10 md:grid-cols-3 lg:grid-cols-5 ">
-          {/* Quick Links */}
+        <div
+          className="
+            grid
+            grid-cols-2
+            gap-x-8
+            gap-y-12
+            md:grid-cols-3
+            lg:grid-cols-5
+          "
+        >
+
+          {/* ========================================================= */}
+          {/* QUICK LINKS */}
+          {/* ========================================================= */}
 
           <div>
-            <h3 className="mb-6 text-xl font-semibold ">Quick Links</h3>
+            <h3
+              className="
+                mb-6
+                text-lg
+                font-semibold
+                text-[var(--footer-text)]
+              "
+            >
+              Quick Links
+            </h3>
 
             <ul className="space-y-4">
               {quickLinks.map((link) => (
                 <li key={link.name}>
                   <Link
                     href={link.href}
-                    className="text-gray-500 hover:text-[#1A6DB5] transition"
+                    className="
+                      text-sm
+                      text-[var(--footer-muted)]
+                      transition-colors
+                      duration-200
+                      hover:text-[var(--gold)]
+                    "
                   >
                     {link.name}
                   </Link>
@@ -313,8 +494,19 @@ export default function Footer() {
             </ul>
           </div>
 
+          {/* ========================================================= */}
+          {/* MARKETPLACE */}
+          {/* ========================================================= */}
+
           <div>
-            <h3 className="mb-6 text-xl font-semibold text-white">
+            <h3
+              className="
+                mb-6
+                text-lg
+                font-semibold
+                text-[var(--footer-text)]
+              "
+            >
               Marketplace & API
             </h3>
 
@@ -323,7 +515,13 @@ export default function Footer() {
                 <li key={link.name}>
                   <Link
                     href={link.href}
-                    className="text-gray-500 hover:text-[#1A6DB5] transition"
+                    className="
+                      text-sm
+                      text-[var(--footer-muted)]
+                      transition-colors
+                      duration-200
+                      hover:text-[var(--gold)]
+                    "
                   >
                     {link.name}
                   </Link>
@@ -332,8 +530,19 @@ export default function Footer() {
             </ul>
           </div>
 
+          {/* ========================================================= */}
+          {/* TRANSPARENCY */}
+          {/* ========================================================= */}
+
           <div>
-            <h3 className="mb-6 text-xl font-semibold text-white">
+            <h3
+              className="
+                mb-6
+                text-lg
+                font-semibold
+                text-[var(--footer-text)]
+              "
+            >
               Transparency
             </h3>
 
@@ -342,7 +551,13 @@ export default function Footer() {
                 <li key={link.name}>
                   <Link
                     href={link.href}
-                    className="text-gray-500 hover:text-[#1A6DB5] transition"
+                    className="
+                      text-sm
+                      text-[var(--footer-muted)]
+                      transition-colors
+                      duration-200
+                      hover:text-[var(--gold)]
+                    "
                   >
                     {link.name}
                   </Link>
@@ -351,8 +566,19 @@ export default function Footer() {
             </ul>
           </div>
 
+          {/* ========================================================= */}
+          {/* SUSTAINABILITY */}
+          {/* ========================================================= */}
+
           <div>
-            <h3 className="mb-6 text-xl font-semibold text-white">
+            <h3
+              className="
+                mb-6
+                text-lg
+                font-semibold
+                text-[var(--footer-text)]
+              "
+            >
               Sustainability
             </h3>
 
@@ -361,7 +587,13 @@ export default function Footer() {
                 <li key={link.name}>
                   <Link
                     href={link.href}
-                    className="text-gray-500 hover:text-[#1A6DB5] transition"
+                    className="
+                      text-sm
+                      text-[var(--footer-muted)]
+                      transition-colors
+                      duration-200
+                      hover:text-[var(--gold)]
+                    "
                   >
                     {link.name}
                   </Link>
@@ -370,8 +602,19 @@ export default function Footer() {
             </ul>
           </div>
 
+          {/* ========================================================= */}
+          {/* SUPPORT */}
+          {/* ========================================================= */}
+
           <div>
-            <h3 className="mb-6 text-xl font-semibold text-white">
+            <h3
+              className="
+                mb-6
+                text-lg
+                font-semibold
+                text-[var(--footer-text)]
+              "
+            >
               Support & Governance
             </h3>
 
@@ -380,7 +623,13 @@ export default function Footer() {
                 <li key={link.name}>
                   <Link
                     href={link.href}
-                    className="text-gray-500 hover:text-[#1A6DB5] transition"
+                    className="
+                      text-sm
+                      text-[var(--footer-muted)]
+                      transition-colors
+                      duration-200
+                      hover:text-[var(--gold)]
+                    "
                   >
                     {link.name}
                   </Link>
@@ -389,8 +638,19 @@ export default function Footer() {
             </ul>
           </div>
 
+          {/* ========================================================= */}
+          {/* INTELLECTUAL PROPERTY */}
+          {/* ========================================================= */}
+
           <div>
-            <h3 className="mb-6 text-xl font-semibold text-white">
+            <h3
+              className="
+                mb-6
+                text-lg
+                font-semibold
+                text-[var(--footer-text)]
+              "
+            >
               Intellectual Property
             </h3>
 
@@ -399,7 +659,13 @@ export default function Footer() {
                 <li key={link.name}>
                   <Link
                     href={link.href}
-                    className="text-gray-500 hover:text-[#1A6DB5] transition"
+                    className="
+                      text-sm
+                      text-[var(--footer-muted)]
+                      transition-colors
+                      duration-200
+                      hover:text-[var(--gold)]
+                    "
                   >
                     {link.name}
                   </Link>
@@ -408,8 +674,19 @@ export default function Footer() {
             </ul>
           </div>
 
+          {/* ========================================================= */}
+          {/* AI */}
+          {/* ========================================================= */}
+
           <div>
-            <h3 className="mb-6 text-xl font-semibold text-white">
+            <h3
+              className="
+                mb-6
+                text-lg
+                font-semibold
+                text-[var(--footer-text)]
+              "
+            >
               AI & Ethical Technology
             </h3>
 
@@ -418,7 +695,13 @@ export default function Footer() {
                 <li key={link.name}>
                   <Link
                     href={link.href}
-                    className="text-gray-500 hover:text-[#1A6DB5] transition"
+                    className="
+                      text-sm
+                      text-[var(--footer-muted)]
+                      transition-colors
+                      duration-200
+                      hover:text-[var(--gold)]
+                    "
                   >
                     {link.name}
                   </Link>
@@ -427,8 +710,19 @@ export default function Footer() {
             </ul>
           </div>
 
+          {/* ========================================================= */}
+          {/* INFORMATION SECURITY */}
+          {/* ========================================================= */}
+
           <div>
-            <h3 className="mb-6 text-xl font-semibold text-white">
+            <h3
+              className="
+                mb-6
+                text-lg
+                font-semibold
+                text-[var(--footer-text)]
+              "
+            >
               Information Security
             </h3>
 
@@ -437,7 +731,13 @@ export default function Footer() {
                 <li key={link.name}>
                   <Link
                     href={link.href}
-                    className="text-gray-500 hover:text-[#1A6DB5] transition"
+                    className="
+                      text-sm
+                      text-[var(--footer-muted)]
+                      transition-colors
+                      duration-200
+                      hover:text-[var(--gold)]
+                    "
                   >
                     {link.name}
                   </Link>
@@ -446,8 +746,19 @@ export default function Footer() {
             </ul>
           </div>
 
+          {/* ========================================================= */}
+          {/* DATA GOVERNANCE */}
+          {/* ========================================================= */}
+
           <div>
-            <h3 className="mb-6 text-xl font-semibold text-white">
+            <h3
+              className="
+                mb-6
+                text-lg
+                font-semibold
+                text-[var(--footer-text)]
+              "
+            >
               Data Governance
             </h3>
 
@@ -456,7 +767,13 @@ export default function Footer() {
                 <li key={link.name}>
                   <Link
                     href={link.href}
-                    className="text-gray-500 hover:text-[#1A6DB5] transition"
+                    className="
+                      text-sm
+                      text-[var(--footer-muted)]
+                      transition-colors
+                      duration-200
+                      hover:text-[var(--gold)]
+                    "
                   >
                     {link.name}
                   </Link>
@@ -465,8 +782,21 @@ export default function Footer() {
             </ul>
           </div>
 
+          {/* ========================================================= */}
+          {/* PLATFORMS */}
+          {/* ========================================================= */}
+
           <div>
-            <h3 className="mb-6 text-xl font-semibold">Our Platforms</h3>
+            <h3
+              className="
+                mb-6
+                text-lg
+                font-semibold
+                text-[var(--footer-text)]
+              "
+            >
+              Our Platforms
+            </h3>
 
             <ul className="space-y-4">
               {platforms.map((platform) => (
@@ -475,7 +805,13 @@ export default function Footer() {
                     href={platform.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-gray-500 hover:text-[#1A6DB5] transition"
+                    className="
+                      text-sm
+                      text-[var(--footer-muted)]
+                      transition-colors
+                      duration-200
+                      hover:text-[var(--gold)]
+                    "
                   >
                     {platform.name}
                   </a>
@@ -483,7 +819,27 @@ export default function Footer() {
               ))}
             </ul>
           </div>
+
         </div>
+
+        {/* ========================================================= */}
+        {/* BOTTOM BORDER / COPYRIGHT */}
+        {/* ========================================================= */}
+
+        <div
+          className="
+            mt-16
+            border-t
+            border-[var(--footer-border)]
+            pt-8
+            text-center
+          "
+        >
+          <p className="text-sm text-[var(--footer-muted)]">
+            © {new Date().getFullYear()} ATTPL Group. All rights reserved.
+          </p>
+        </div>
+
       </div>
     </footer>
   );

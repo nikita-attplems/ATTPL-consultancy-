@@ -95,111 +95,180 @@ export default function MarketplaceNavigator() {
   const [activeCategory, setActiveCategory] = useState(categories[0]);
 
   return (
-    <section className="bg-[#F8FAFC] py-24">
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        {/* Heading */}
+  <section className="bg-background py-24">
+  <div className="mx-auto max-w-[1600px] px-6 lg:px-10">
 
-        <div className="mb-16 text-center">
-          <span className="inline-flex items-center rounded-full border border-slate-200 bg-slate-50 px-4 py-2 text-xs font-semibold uppercase tracking-[0.25em] text-slate-600">
-            MARKETPLACE CATEGORIES
-          </span>
+    {/* Heading */}
+    <div className="mb-16 text-center">
 
-          <h2 className="mt-5 text-5xl font-bold text-slate-900">
-            Expert Marketplace
-          </h2>
+      <span
+        className="
+          inline-flex
+          items-center
+          rounded-full
+          border
+          border-border
+          bg-surface
+          px-4
+          py-2
+          text-xs
+          font-semibold
+          uppercase
+          tracking-[0.25em]
+          text-text-secondary
+        "
+      >
+        MARKETPLACE CATEGORIES
+      </span>
 
-          <p className="mx-auto mt-5 max-w-3xl text-lg text-slate-600">
-            Browse professional consulting categories and discover specialized
-            business solutions from ATTPL's integrated consulting ecosystem.
-          </p>
+      <h2 className="mt-5 text-5xl font-bold text-primary">
+        Expert Marketplace
+      </h2>
+
+      <p className="mx-auto mt-5 max-w-3xl text-lg text-text-secondary">
+        Browse professional consulting categories and discover specialized
+        business solutions from ATTPL&apos;s integrated consulting ecosystem.
+      </p>
+
+    </div>
+
+    {/* Main Layout */}
+    <div
+  className="
+    w-full
+    overflow-hidden
+    rounded-[32px]
+    border
+    border-border
+    bg-surface
+    shadow-xl
+  "
+>
+      <div className="grid lg:grid-cols-[360px_1fr]">
+
+        {/* LEFT NAV */}
+        <div className="border-r border-border bg-background">
+
+          {categories.map((category) => (
+            <button
+              key={category.id}
+              onClick={() => setActiveCategory(category)}
+              className={`
+                group
+                w-full
+                border-b
+                border-border
+                p-6
+                text-left
+                transition-all
+                duration-300
+
+                ${
+                  activeCategory.id === category.id
+                    ? "border-l-4 border-l-gold bg-surface"
+                    : "hover:bg-surface"
+                }
+              `}
+            >
+
+              <h3 className="text-lg font-semibold text-primary">
+                {category.title}
+              </h3>
+
+              <p className="mt-2 text-sm text-text-secondary">
+                {category.subtitle}
+              </p>
+
+            </button>
+          ))}
+
         </div>
 
-        {/* Main Layout */}
+        {/* RIGHT CONTENT */}
+       <div className="grid items-center gap-16 px-14 py-12 lg:grid-cols-[1.1fr_0.9fr] xl:px-16">
 
-        <div className="overflow-hidden rounded-[32px] border border-slate-200 bg-white shadow-xl">
-          <div className="grid lg:grid-cols-[330px_1fr]">
-            {/* LEFT NAV */}
+          {/* LEFT */}
+          <div>
 
-            <div className="border-r border-slate-200 bg-slate-50">
-              {categories.map((category) => (
-                <button
-                  key={category.id}
-                  onClick={() => setActiveCategory(category)}
-                  className={`group w-full border-b border-slate-200 p-6 text-left transition-all duration-300 ${
-                    activeCategory.id === category.id
-                      ? "bg-white border-l-4 border-l-[#FBB040]"
-                      : "hover:bg-white"
-                  }`}
+            <span
+              className="
+                rounded-full
+                bg-gold-light
+                px-4
+                py-2
+                text-sm
+                font-medium
+                text-gold
+              "
+            >
+              {activeCategory.title}
+            </span>
+
+            <h3 className="mt-6 text-4xl font-bold text-primary">
+              {activeCategory.title}
+            </h3>
+
+            <p className="mt-4 text-lg text-text-secondary">
+              Explore professional services delivered by verified experts
+              across India.
+            </p>
+
+            <div className="mt-8 grid gap-4 sm:grid-cols-2">
+
+              {activeCategory.services.map((service) => (
+                <div
+                  key={service}
+                  className="
+                    flex
+                    items-center
+                    gap-3
+                    rounded-xl
+                    bg-background
+                    px-4
+                    py-3
+                    transition-colors
+                    hover:bg-gold-light
+                  "
                 >
-                  <h3 className="text-lg font-semibold text-slate-900">
-                    {category.title}
-                  </h3>
 
-                  <p className="mt-2 text-sm text-slate-500">
-                    {category.subtitle}
-                  </p>
-                </button>
+                  <span className="h-2.5 w-2.5 rounded-full bg-gold" />
+
+                  <span className="font-medium text-text">
+                    {service}
+                  </span>
+
+                </div>
               ))}
+
             </div>
 
-            {/* RIGHT CONTENT */}
+            <Button
+              className="mt-8 px-6 py-3 text-base"
+              href="/service-form"
+            >
+              Find Experts
+            </Button>
 
-            <div className="grid items-center gap-12 p-10 lg:grid-cols-2">
-              {/* LEFT */}
-
-              <div>
-                <span className="rounded-full bg-[#3A87C3]/10 px-4 py-2 text-sm font-medium text-[#3A87C3]">
-                  {activeCategory.title}
-                </span>
-
-                <h3 className="mt-6 text-4xl font-bold text-slate-900">
-                  {activeCategory.title}
-                </h3>
-
-                <p className="mt-4 text-lg text-slate-600">
-                  Explore professional services delivered by verified experts
-                  across India.
-                </p>
-
-                <div className="mt-8 grid gap-4 sm:grid-cols-2">
-                  {activeCategory.services.map((service) => (
-                    <div
-                      key={service}
-                      className="flex items-center gap-3 rounded-xl bg-slate-50 px-4 py-3"
-                    >
-                      <span className="h-2.5 w-2.5 rounded-full bg-[#FBB040]" />
-
-                      <span className="font-medium text-slate-700">
-                        {service}
-                      </span>
-                    </div>
-                  ))}
-                </div>
-                <Button
-                  className="mt-8 px-6 py-3 text-base"
-                  href="/service-form"
-                >
-                  Find Experts
-                </Button>
-              </div>
-
-              {/* IMAGE */}
-
-              <div className="flex justify-center">
-                <div className="relative h-[450px] w-full max-w-md overflow-hidden rounded-3xl">
-                  <Image
-                    src={activeCategory.image}
-                    alt={activeCategory.title}
-                    fill
-                    priority
-                    className="object-cover"
-                  />
-                </div>
-              </div>
-            </div>
           </div>
+
+          {/* IMAGE */}
+          <div className="flex justify-center">
+<div className="relative h-[480px] w-full overflow-hidden rounded-3xl">
+              <Image
+                src={activeCategory.image}
+                alt={activeCategory.title}
+                fill
+                priority
+                className="object-cover"
+              />
+            </div>
+
+          </div>
+
         </div>
       </div>
-    </section>
+    </div>
+  </div>
+</section>
   );
 }

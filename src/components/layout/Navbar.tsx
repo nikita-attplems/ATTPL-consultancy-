@@ -76,31 +76,34 @@ export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      const currentScrollY = window.scrollY;
+ useEffect(() => {
+  const handleScroll = () => {
+    const currentScrollY = window.scrollY;
 
-      if (
-        currentScrollY > lastScrollY.current &&
-        currentScrollY > SCROLL_THRESHOLD
-      ) {
-        setIsVisible(false);
-      } else {
-        setIsVisible(true);
-      }
+    // Always show navbar at the very top
+    if (currentScrollY <= 10) {
+      setIsVisible(true);
+    }
+    // Scrolling down → hide
+    else if (currentScrollY > lastScrollY.current) {
+      setIsVisible(false);
+    }
+    // Scrolling up → show
+    else if (currentScrollY < lastScrollY.current) {
+      setIsVisible(true);
+    }
 
-      lastScrollY.current = currentScrollY;
-    };
+    lastScrollY.current = currentScrollY;
+  };
 
-    window.addEventListener("scroll", handleScroll, {
-      passive: true,
-    });
+  window.addEventListener("scroll", handleScroll, {
+    passive: true,
+  });
 
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
-
+  return () => {
+    window.removeEventListener("scroll", handleScroll);
+  };
+}, []);
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth >= 1024) {
@@ -115,13 +118,14 @@ export default function Navbar() {
   }, []);
 
   return (
-    <nav
-      className={`fixed top-4 left-1/2 z-50 w-[94%] sm:w-[95%] lg:w-[96%] max-w-7xl -translate-x-1/2 rounded-2xl
-         border border-white/50 bg-white/60 backdrop-blur-4xl shadow-[0_8px_30px_rgba(0,0,0,0.08)]
-          transition-all duration-500 ${
-            isVisible ? "translate-y-0" : "-translate-y-32"
-          }`}
-    >
+  <nav
+  className={`fixed left-1/2 top-4 z-50 w-[94%] -translate-x-1/2
+    sm:w-[95%] lg:w-[96%] max-w-7xl rounded-2xl
+    border border-gray-200 bg-white
+    shadow-[0_8px_30px_rgba(0,0,0,0.07)]
+    transition-transform duration-300 ease-out
+    ${isVisible ? "translate-y-0" : "-translate-y-32"}`}
+>
       <div className="flex h-16 lg:h-18 items-center justify-between px-4 sm:px-6 lg:px-8">
         {/* Logo */}
         <Link href="/" className="flex items-center">
@@ -226,7 +230,7 @@ export default function Navbar() {
           {/* CTA */}
           <Link
             href="/service-form"
-            className="rounded-full bg-[#1B2435] px-6 py-3 text-sm font-semibold text-white shadow-lg transition-all duration-300 hover:-translate-y-0.5 hover:bg-gray-800 hover:shadow-xl"
+            className="rounded-full bg-[#252025] px-6 py-3 text-sm font-semibold text-white shadow-lg transition-all duration-300 hover:-translate-y-0.5 hover:bg-gray-800 hover:shadow-xl"
           >
             Book Consultation →
           </Link>

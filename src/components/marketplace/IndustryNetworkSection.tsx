@@ -9,17 +9,7 @@ import {
   FaGraduationCap,
   FaShoppingBag,
   FaLeaf,
-  FaArrowRight,
 } from "react-icons/fa";
-
-
-
-import { useRef } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useGSAP } from "@gsap/react";
-
-gsap.registerPlugin(ScrollTrigger);
 
 const industries = [
   {
@@ -73,148 +63,140 @@ const industries = [
 ];
 
 export default function IndustryExpertiseSection() {
-
-  useGSAP(() => {
-  const ctx = gsap.context(() => {
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: sectionRef.current,
-        start: "top 75%",
-        toggleActions: "play none none reverse",
-      },
-    });
-
-    tl.from(leftRef.current, {
-      x: -80,
-      opacity: 0,
-      duration: 1,
-      ease: "power3.out",
-    }, 0)
-
-    .from(rightRef.current, {
-      x: 80,
-      opacity: 0,
-      duration: 1,
-      ease: "power3.out",
-    }, 0);
-
-  }, sectionRef);
-
-  return () => ctx.revert();
-}, []);
-  const sectionRef = useRef<HTMLElement>(null);
-const leftRef = useRef<HTMLDivElement>(null);
-const rightRef = useRef<HTMLDivElement>(null);
-
-const leftIndustries = industries.slice(0, 4);
-const rightIndustries = industries.slice(4);
+  const leftIndustries = industries.slice(0, 4);
+  const rightIndustries = industries.slice(4);
 
   return (
-    <section
-  ref={sectionRef}
-  className="bg-slate-50 py-24"
->
-      <div className="mx-auto max-w-7xl px-6">
+    <section className="bg-background py-24 lg:py-28">
+      <div className="mx-auto max-w-7xl px-6 lg:px-8">
+
         {/* Heading */}
-
         <div className="mx-auto max-w-3xl text-center">
-          <span className="inline-flex items-center rounded-full border border-slate-200 bg-slate-50 px-4 py-2 text-xs font-semibold uppercase tracking-[0.25em] text-slate-500">
-            INDUSTRY EXPERTISE
-          </span>
 
-          <h2
-            className="
-            mt-6
-            text-4xl
-            font-bold
-            text-[#0B1B3A]
-            md:text-5xl
-            "
-          >
-            Solutions Across Multiple Industries
+          <p className="text-xs font-bold uppercase tracking-[0.25em] text-gold">
+            Industry Expertise
+          </p>
+
+          <h2 className="mt-5 text-4xl font-black leading-tight text-primary md:text-5xl">
+            Solutions Across
+            <span className="text-gold"> Multiple Industries</span>
           </h2>
 
-          <p
-            className="
-            mt-5
-            text-lg
-            leading-relaxed
-            text-slate-500
-            "
-          >
+          <p className="mt-5 text-base leading-7 text-text-secondary">
             Connect with specialized professionals, consultants and solution
             providers across diverse industries through ATTPL Marketplace.
           </p>
+
         </div>
 
-        {/* Industry Cards */}
+        {/* Industries */}
+        <div className="mt-16 grid gap-x-16 lg:grid-cols-2">
 
-        <div className="mt-16 grid gap-12 lg:grid-cols-2">
-          {/* Left */}
-          <div
-  ref={leftRef}
-  className="space-y-8"
->
-            {leftIndustries.map((industry) => {
+          {/* LEFT */}
+          <div>
+            {leftIndustries.map((industry, index) => {
               const Icon = industry.icon;
 
               return (
                 <div
                   key={industry.title}
-                  className="group flex items-start gap-5 border-b border-slate-200 pb-8"
+                  className="
+                    flex
+                    gap-5
+                    border-b
+                    border-border
+                    py-7
+                  "
                 >
-                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-yellow-50 text-yellow-500">
-                    <Icon className="text-xl" />
+                  {/* Number */}
+                  <span className="pt-1 text-xs font-bold tracking-widest text-gray-300">
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+
+                  {/* Icon */}
+                  <div
+                    className="
+                      flex
+                      h-11
+                      w-11
+                      shrink-0
+                      items-center
+                      justify-center
+                      rounded-xl
+                      bg-gold/10
+                      text-gold
+                    "
+                  >
+                    <Icon className="text-lg" />
                   </div>
 
-                  <div className="flex-1">
-                    <h3 className="text-xl font-semibold text-[#0B1B3A] transition group-hover:text-yellow-500">
+                  {/* Content */}
+                  <div>
+            <h3 className="text-xl font-bold text-primary lg:text-2xl">
                       {industry.title}
                     </h3>
-
-                    <p className="mt-2 text-sm leading-7 text-slate-500">
+<p className="mt-2 text-base leading-7 text-text-secondary">
                       {industry.description}
                     </p>
                   </div>
-
-                  <FaArrowRight className="mt-1 text-slate-400 transition-all duration-300 group-hover:translate-x-2 group-hover:text-yellow-500" />
                 </div>
               );
             })}
           </div>
 
-          {/* Right */}
-          <div
-  ref={leftRef}
-  className="space-y-8"
->
-            {rightIndustries.map((industry) => {
+          {/* RIGHT */}
+          <div>
+            {rightIndustries.map((industry, index) => {
               const Icon = industry.icon;
 
               return (
                 <div
                   key={industry.title}
-                  className="group flex items-start gap-5 border-b border-slate-200 pb-8"
+                  className="
+                    flex
+                    gap-5
+                    border-b
+                    border-border
+                    py-7
+                  "
                 >
-                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-yellow-50 text-yellow-500">
-                    <Icon className="text-xl" />
+                  {/* Number */}
+                  <span className="pt-1 text-xs font-bold tracking-widest text-gray-300">
+                    {String(index + 5).padStart(2, "0")}
+                  </span>
+
+                  {/* Icon */}
+                  <div
+                    className="
+                      flex
+                      h-11
+                      w-11
+                      shrink-0
+                      items-center
+                      justify-center
+                      rounded-xl
+                      bg-gold/10
+                      text-gold
+                    "
+                  >
+                    <Icon className="text-lg" />
                   </div>
 
-                  <div className="flex-1">
-                    <h3 className="text-xl font-semibold text-[#0B1B3A] transition group-hover:text-yellow-500">
+                  {/* Content */}
+                  <div>
+                    <h3 className="text-xl font-bold text-primary lg:text-2xl">
                       {industry.title}
                     </h3>
 
-                    <p className="mt-2 text-sm leading-7 text-slate-500">
+               <p className="mt-2 text-base leading-7 text-text-secondary">
                       {industry.description}
                     </p>
                   </div>
-
-                  <FaArrowRight className="mt-1 text-slate-400 transition-all duration-300 group-hover:translate-x-2 group-hover:text-yellow-500" />
                 </div>
               );
             })}
           </div>
+
         </div>
       </div>
     </section>

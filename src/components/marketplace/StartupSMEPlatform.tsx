@@ -57,90 +57,65 @@ const startupServices: StartupService[] = [
 
 export default function StartupSMEPlatform() {
   return (
-    <section className="relative overflow-hidden bg-white py-24">
+    <section className="relative overflow-hidden bg-background py-24">
       {/* Background */}
       <div
         className="
-        absolute right-0 top-0
-        h-96 w-96
-        rounded-full
-        bg-blue-100/40
-        blur-3xl
-      "
+      absolute right-0 top-0
+      h-96 w-96
+      rounded-full
+      bg-gold/10
+      blur-3xl
+    "
       />
 
       <div
         className="
-        relative mx-auto
-        max-w-7xl px-6
-      "
+      relative mx-auto
+      max-w-7xl px-6
+    "
       >
         {/* Hero */}
         <div
           className="
-          grid items-center
-          gap-14 lg:grid-cols-2
-        "
+        grid items-center
+        gap-14 lg:grid-cols-2
+      "
         >
           {/* Left */}
           <div
             className="
-            relative
-            rounded-3xl
-            border border-slate-200
-            bg-gradient-to-br
-            from-blue-50
-            to-white
-            p-10
-            shadow-xl
-          "
+          relative
+          rounded-3xl
+          border border-border
+          bg-gradient-to-br
+          from-gold/10
+          to-background
+          p-10
+          shadow-xl
+        "
           >
             <div
               className="
-              mx-auto
-              flex h-56 w-56
-              items-center justify-center
-              rounded-full
-              bg-white
-              shadow-lg
-            "
-            >
-              <div
-                className="
-                flex h-32 w-32
-                items-center justify-center
-                rounded-full
-                bg-blue-600
-                text-5xl
-                text-white
-              "
-              >
-                🚀
-              </div>
-            </div>
-
-            <div
-              className="
-              mt-8
-              grid grid-cols-2
-              gap-4
-            "
+            mt-8
+            grid grid-cols-2
+            gap-4
+          "
             >
               {["Mentors", "Investors", "Technology", "Advisors"].map(
                 (item) => (
                   <div
                     key={item}
                     className="
-                    rounded-xl
-                    bg-white
-                    border
-                    border-slate-200
-                    px-4 py-3
-                    text-center
-                    text-sm
-                    font-semibold
-                    text-slate-700
-                  "
+                  rounded-xl
+                  bg-surface
+                  border border-border
+                  px-4 py-3
+                  text-center
+                  text-sm
+                  font-semibold
+                  text-text-secondary
+                "
                   >
                     {item}
                   </div>
@@ -151,74 +126,45 @@ export default function StartupSMEPlatform() {
 
           {/* Right Ecosystem Card */}
           <div>
-            <span className="inline-flex items-center rounded-full border border-slate-200 bg-slate-50 px-4 py-2 text-xs font-semibold uppercase tracking-[0.25em] text-slate-600">
-              Startup • SME • Growth
-            </span>
-
             <h2
               className="
-              mt-6
-              text-4xl md:text-5xl
-              font-bold
-              leading-tight
-              text-slate-900
-            "
+            mt-6
+            text-4xl md:text-5xl
+            font-bold
+            leading-tight
+            text-primary
+          "
             >
               Startup & SME
-              <span className="text-blue-600"> Success Platform</span>
+              <span className="text-gold"> Success Platform</span>
             </h2>
-
-            <p
-              className="
-              mt-6
-              max-w-xl
-              text-lg
-              leading-relaxed
-              text-slate-600
-            "
-            >
-              Build, launch, and scale your business with expert consultants,
-              mentors, technology partners, and growth solutions.
-            </p>
-
-           
           </div>
         </div>
 
         {/* Service Cards */}
         <div className="mt-24">
-          <div
-            className="
-            mb-10
-            text-center
-          "
-          >
+          <div className="mb-10 text-center">
             <h3
               className="
-              text-3xl
-              font-bold
-              text-slate-900
-            "
+            text-3xl
+            font-bold
+            text-primary
+          "
             >
               Startup Growth Solutions
             </h3>
 
-            <p
-              className="
-              mt-3
-              text-slate-600
-            "
-            >
+            <p className="mt-3 text-text-secondary">
               Everything founders need to build and scale successful businesses.
             </p>
           </div>
 
           <div
             className="
-            grid gap-6
-            sm:grid-cols-2
-            lg:grid-cols-3
-          "
+          grid gap-6
+          sm:grid-cols-2
+          lg:grid-cols-3
+        "
           >
             {startupServices.map((service, index) => {
               const Icon = service.icon;
@@ -227,51 +173,51 @@ export default function StartupSMEPlatform() {
                 <div
                   key={index}
                   className="
-                    group
-                    rounded-2xl
-                    border border-slate-200
-                    bg-white
-                    p-7
-                    transition-all
-                    duration-300
-                    hover:-translate-y-2
-                    hover:shadow-xl
-                  "
+                group
+                rounded-2xl
+                border border-border
+                bg-surface
+                p-7
+                transition-all
+                duration-300
+                hover:-translate-y-2
+                hover:shadow-xl
+              "
                 >
                   <div
                     className="
-                    flex h-14 w-14
-                    items-center justify-center
-                    rounded-xl
-                    bg-blue-50
-                    text-2xl
-                    text-blue-600
-                    transition
-                    group-hover:bg-yellow-400
-                    group-hover:text-slate-900
-                  "
+                  flex h-14 w-14
+                  items-center justify-center
+                  rounded-xl
+                  bg-gold/10
+                  text-2xl
+                  text-gold
+                  transition
+                  group-hover:bg-gold
+                  group-hover:text-white
+                "
                   >
                     <Icon />
                   </div>
 
                   <h4
                     className="
-                    mt-6
-                    text-xl
-                    font-semibold
-                    text-slate-900
-                  "
+                  mt-6
+                  text-xl
+                  font-semibold
+                  text-primary
+                "
                   >
                     {service.title}
                   </h4>
 
                   <p
                     className="
-                    mt-3
-                    text-sm
-                    leading-relaxed
-                    text-slate-600
-                  "
+                  mt-3
+                  text-sm
+                  leading-relaxed
+                  text-text-secondary
+                "
                   >
                     {service.description}
                   </p>

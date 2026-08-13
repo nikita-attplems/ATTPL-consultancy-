@@ -45,62 +45,122 @@ export default function FAQ() {
   };
 
   return (
-    <section className="bg-slate-50 py-24">
-      <div className="mx-auto max-w-4xl px-6">
-        {/* Heading */}
+  <section className="bg-background py-24">
+  <div className="mx-auto max-w-4xl px-6">
 
-        <div className="mx-auto max-w-3xl text-center">
-          <span className="inline-flex rounded-full border border-slate-200 bg-white px-4 py-2 text-xs font-semibold uppercase tracking-[0.25em] text-slate-500">
-            {faqData.badge}
-          </span>
+    {/* Heading */}
 
-          
-        </div>
+    <div className="mx-auto max-w-3xl text-center">
+      <span
+        className="
+          inline-flex
+          rounded-full
+          border
+          border-border
+          bg-surface
+          px-4
+          py-2
+          text-xs
+          font-semibold
+          uppercase
+          tracking-[0.25em]
+          text-text-secondary
+        "
+      >
+        {faqData.badge}
+      </span>
+    </div>
 
-        {/* FAQ */}
+    {/* FAQ */}
 
-        <div className="mt-16 space-y-4">
-          {faqData.faqs.map((faq, index) => {
-            const isOpen = activeIndex === index;
+    <div className="mt-16 space-y-4">
 
-            return (
+      {faqData.faqs.map((faq, index) => {
+        const isOpen = activeIndex === index;
+
+        return (
+          <div
+            key={index}
+            className="
+              overflow-hidden
+              rounded-2xl
+              border
+              border-border
+              bg-surface
+              transition-all
+              duration-300
+              hover:border-gold
+            "
+          >
+
+            <button
+              onClick={() => toggleFAQ(index)}
+              className="
+                flex
+                w-full
+                items-center
+                justify-between
+                px-7
+                py-6
+                text-left
+              "
+            >
+
+              <h3 className="pr-6 text-lg font-semibold text-primary">
+                {faq.question}
+              </h3>
+
               <div
-                key={index}
-                className="overflow-hidden rounded-2xl border border-slate-200 bg-white transition-all duration-300 hover:border-yellow-400"
+                className={`
+                  flex
+                  h-10
+                  w-10
+                  items-center
+                  justify-center
+                  rounded-full
+                  transition-all
+                  duration-300
+
+                  ${
+                    isOpen
+                      ? "bg-gold text-white"
+                      : "bg-surface-secondary text-text-secondary"
+                  }
+                `}
               >
-                <button
-                  onClick={() => toggleFAQ(index)}
-                  className="flex w-full items-center justify-between px-7 py-6 text-left"
-                >
-                  <h3 className="pr-6 text-lg font-semibold text-[#0B1B3A]">
-                    {faq.question}
-                  </h3>
-
-                  <div
-                    className={`flex h-10 w-10 items-center justify-center rounded-full transition-all duration-300 ${
-                      isOpen
-                        ? "bg-yellow-400 text-white"
-                        : "bg-slate-100 text-slate-600"
-                    }`}
-                  >
-                    {isOpen ? <FaMinus size={14} /> : <FaPlus size={14} />}
-                  </div>
-                </button>
-
-                <div
-                  className={`overflow-hidden transition-all duration-300 ${
-                    isOpen ? "max-h-60" : "max-h-0"
-                  }`}
-                >
-                  <p className="px-7 pb-7 leading-8 text-slate-600">
-                    {faq.answer}
-                  </p>
-                </div>
+                {isOpen ? (
+                  <FaMinus size={14} />
+                ) : (
+                  <FaPlus size={14} />
+                )}
               </div>
-            );
-          })}
-        </div>
-      </div>
-    </section>
+
+            </button>
+
+            <div
+              className={`
+                overflow-hidden
+                transition-all
+                duration-300
+
+                ${
+                  isOpen
+                    ? "max-h-60"
+                    : "max-h-0"
+                }
+              `}
+            >
+              <p className="px-7 pb-7 leading-8 text-text-secondary">
+                {faq.answer}
+              </p>
+            </div>
+
+          </div>
+        );
+      })}
+
+    </div>
+  </div>
+</section>
   );
 }

@@ -72,13 +72,14 @@ const Hero = () => {
       </div>
 
       {/* Dark Radial Overlay */}
-      <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle,rgba(0,0,0,0.2)_0%,rgba(0,0,0,0.6)_100%)] z-10"></div>
+      <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle,rgba(0,0,0,0.25)_0%,rgba(0,0,0,0.75)_100%)] z-10"></div>
 
       <div
         className="
     absolute
     bottom-0
     right-0
+    left-0
     translate-y-1/2
     w-24
     h-24
@@ -113,13 +114,13 @@ const Hero = () => {
               className="text-white text-5xl md:text-7xl font-black leading-[1.1] drop-shadow-md uppercase"
             >
               {headlines[currentIndex].line1} <br />
-              <span className="text-[#FBB040]">
+              <span className="text-gold">
                 {headlines[currentIndex].line2}
               </span>
             </h1>
           </div>
 
-         <p className="text-[#f0f0f0] text-lg font-medium leading-relaxed max-w-[80%] mx-auto">
+         <p className="text-white/90 text-lg font-medium leading-relaxed max-w-[80%] mx-auto">
   ATTPL Consultancy provides bespoke Political, Legal, and Corporate
   solutions. Navigating complexity so you can focus on growth.
 </p>
